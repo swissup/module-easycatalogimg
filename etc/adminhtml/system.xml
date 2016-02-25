@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="easycatalogimg" translate="label" type="text" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Easy Catalog Images</label>
+            <tab>swissup</tab>
+            <resource>Swissup_Easycatalogimg::config_easycatalogimg</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="use_image_attribute" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use category image, when thumbnail is not available</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="resize_image" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use image helper to resize images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Set Yes, to guarantee the equal sized images</comment>
+                </field>
+                <field id="background" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background color</label>
+                    <comment><![CDATA[Color in RGB mode. Example:<br/> 255,255,255 - white<br/>0,0,0 - black]]></comment>
+                    <depends>
+                        <field id="resize_image">1</field>
+                    </depends>
+                </field>
+                <field id="placeholder" translate="label comment" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image placeholder</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>Swissup\Easycatalogimg\Model\Config\Backend\Image\Placeholder</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">easycatalogimg/image</upload_dir>
+                    <base_url type="media" scope_info="1">easycatalogimg/image</base_url>
+                </field>
+            </group>
+
+            <group id="category" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category page</label>
+                <field id="enabled_for_default" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled for default categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enabled_for_anchor" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled for anchor categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hide_when_filter_is_used" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hidden, when filter or pagination is used</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="category_count" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of categories to show</label>
+                </field>
+                <field id="column_count" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Columns count</label>
+                </field>
+                <field id="show_image" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="image_width" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image width</label>
+                </field>
+                <field id="image_height" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image height</label>
+                </field>
+                <field id="subcategory_count" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of subcategories to show</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
