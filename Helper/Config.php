@@ -87,6 +87,12 @@ class Config extends AbstractHelper
      */
     const XML_PATH_SUBCATEGORY_COUNT = 'easycatalogimg/category/subcategory_count';
     /**
+     * Path to full category config section
+     *
+     * @var string
+     */
+    const XML_PATH_CATEGORY_CONFIG = 'easycatalogimg/category';
+    /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected $_scopeConfig;
@@ -160,5 +166,12 @@ class Config extends AbstractHelper
     public function getSubcategoryCount()
     {
         return (int)$this->_getConfig(self::XML_PATH_SUBCATEGORY_COUNT);
+    }
+    public function getBlockConfig()
+    {
+        $config = $this->_getConfig(self::XML_PATH_CATEGORY_CONFIG);
+        $config['use_image_attribute'] = $this->useImageAttribute();
+        $config['resize_image'] = $this->useImageAttribute();
+        return $config;
     }
 }
