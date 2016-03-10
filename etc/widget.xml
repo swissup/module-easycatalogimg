@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="swissup_easycatalogimg_list" class="Swissup\Easycatalogimg\Block\Widget\SubcategoriesList" is_email_compatible="true"
+        placeholder_image="Swissup_Easycatalogimg::images/widget_list.png" ttl="86400">
+        <label translate="true">Easy Catalog Images</label>
+        <description>List of subcategories with thumbnails</description>
+        <parameters>
+            <parameter name="category_id" xsi:type="block" visible="true" required="false" sort_order="10">
+                <label translate="true">Root Category</label>
+                <block class="Magento\Catalog\Block\Adminhtml\Category\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Category...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="category_count" xsi:type="text" required="true" visible="true" sort_order="20">
+                <label translate="true">Number of categories to show</label>
+                <value>100</value>
+            </parameter>
+            <parameter name="subcategory_count" xsi:type="text" required="true" visible="true" sort_order="30">
+                <label translate="true">Number of subcategories to show</label>
+                <value>5</value>
+            </parameter>
+            <parameter name="column_count" xsi:type="text" required="true" visible="true" sort_order="40">
+                <label translate="true">Columns count</label>
+                <description>2 — 6 columns</description>
+                <value>4</value>
+            </parameter>
+            <parameter name="show_image" xsi:type="select" visible="true" required="false" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="50">
+                <label translate="true">Show images</label>
+            </parameter>
+            <parameter name="image_width" xsi:type="text" required="false" visible="true" sort_order="60">
+                <label translate="true">Image width</label>
+                <depends>
+                    <parameter name="show_image" value="1" />
+                </depends>
+                <value>200</value>
+            </parameter>
+            <parameter name="image_height" xsi:type="text" required="false" visible="true" sort_order="70">
+                <label translate="true">Image height</label>
+                <depends>
+                    <parameter name="show_image" value="1" />
+                </depends>
+                <value>200</value>
+            </parameter>
+            <parameter name="category_to_show" xsi:type="text" required="false" visible="true" sort_order="80">
+                <label translate="true">Categories to show</label>
+                <description>Comma separated ids. Example: 13,17</description>
+            </parameter>
+            <parameter name="category_to_hide" xsi:type="text" required="false" visible="true" sort_order="90">
+                <label translate="true">Categories to hide</label>
+                <description>Comma separated ids. Example: 13,17</description>
+            </parameter>
+            <parameter name="template" xsi:type="text" required="false" visible="true" sort_order="100">
+                <label translate="true">Template</label>
+                <value>Swissup_Easycatalogimg::list.phtml</value>
+            </parameter>
+            <parameter name="hide_when_filter_is_used" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="110">
+                <label translate="true">Hidden, when filter or pagination is used</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
