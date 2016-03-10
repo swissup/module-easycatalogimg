@@ -171,7 +171,7 @@ class Config extends AbstractHelper
     {
         $config = $this->_getConfig(self::XML_PATH_CATEGORY_CONFIG);
         $config['use_image_attribute'] = $this->useImageAttribute();
-        $config['resize_image'] = $this->useImageAttribute();
+        $config['resize_image'] = $this->useImageResizeHelper();
         return $config;
     }
 }

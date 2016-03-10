@@ -1,6 +1,96 @@
-<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+<?php
+$_categories     = $block->getCategories();
+$_collectionSize = count($_categories);
+if (!$_collectionSize) return;
+$imager = $block->imageHelper;
+if ($background = $this->getBackgroundColor()) {
+    $imager->setBackgroundColor($background);
+}
+$columnsCount = $block->getColumnCount();
+$showImage    = $block->getShowImage();
+$height       = $block->getImageHeight();
+$width        = $block->getImageWidth();
+$maxCategoryCount    = $block->getCategoryCount();
+$maxSubcategoryCount = $block->getSubcategoryCount();
+$i = 0;
+?>
+
+<div class="easycatalogimg">
+<?php foreach ($_categories as $_category) : ?>
+
+    <?php if ($i >= $maxCategoryCount): break; endif; ?>
+
+    <?php if($i++%$columnsCount==0): ?>
+    <ul class="easycatalog-grid easycatalogimg-cols-<?php echo $columnsCount ?>">
+    <?php endif; ?>
+
+    <li class="item">
+        <h5 class="category-name parent-category"><a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></h5>
+        <?php if ($showImage) : ?>
+            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="product-image">
+                <?php if(!$resizeImage = $block->getResizeImage()): ?>
+                    <?php
+                        $style = '';
+                        if (!empty($width)):
+                            $style = 'width: ' . (is_numeric($width) ? $width . 'px' : $width);
+                        elseif (!empty($height)):
+                            $style = 'height: ' . (is_numeric($height) ? $height . 'px' : $height);
+                        endif;
+                    ?>
+                    <img src="<?php echo $block->getImage($_category, 'url') ?>"
+                        style="<?php echo $style ?>" alt="<?php echo $block->escapeHtml($_category->getName()) ?>"
+                    />
+                <?php else:
+                    $imagePath = $block->getImage($_category, 'path');
+                    if ($block->isSvg($imagePath)) {
+                        $image1 = $image2 = $block->getImage($_category, 'url');
+                    } else {
+                        $image1 = $imager->resize($imagePath, $width, $height);
+                        $image2 = $imager->resize($imagePath, $width * 2, $height * 2);
+                    } ?>
+                    <img src="<?php echo $image1 ?>"
+                        srcset="<?php echo $image1 ?> 1x, <?php echo $image2 ?> 2x"
+                        width="<?php echo $width ?>"
+                        height="<?php echo $height ?>"
+                        alt="<?php echo $block->escapeHtml($_category->getName()) ?>"
+                    />
+                <?php endif; ?>
+            </a>
+        <?php endif; ?>
+        <?php
+        if ($maxSubcategoryCount) :
+            $j = 0;
+            $_subcategories = $_category->getSubcategories();
+            $_count         = count($_subcategories);
+            // display More link, if more than one subcategory is not shown, otherwise - display last category
+            $_displayMoreLink = $_count > $maxSubcategoryCount + 1;
+            if ($_count) : ?>
+                <ul class="list-subcategories">
+                <?php foreach ($_subcategories as $_subcategory) :
+                    if ($_displayMoreLink && ($j > $maxSubcategoryCount - 1)): ?>
+                        <li>
+                            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="link-more"><?php echo $this->__('More in %s...', $block->escapeHtml($_category->getName())); ?></a>
+                        </li>
+                        <?php break;
+                    endif; ?>
+                    <li>
+                        <a href="<?php echo $_subcategory->getUrl() ?>"
+                            title="<?php echo $block->escapeHtml($_subcategory->getName())?>"
+                            class="category-name child-category"><?php
+                            echo $block->escapeHtml($_subcategory->getName());
+                        ?></a>
+                    </li>
+                    <?php $j++; ?>
+                <?php endforeach;?>
+                </ul>
+            <?php
+            endif;
+        endif; ?>
+    </li>
+
+    <?php if($i%$columnsCount==0 || $i==$_collectionSize): ?>
+    </ul>
+    <?php endif; ?>
+
+<?php endforeach; ?>
+</div>
