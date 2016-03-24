@@ -1,7 +1,7 @@
 Run,Run
 "Please select the checkbox above","Please select the checkbox above"
-"%s is not writable","%s is not writable"
-"More in %s...","More in %s..."
+"%1 is not writable","%1 is not writable"
+"More in %1...","More in %1..."
 "Completed. {count} items were processed.","Completed. {count} items were processed."
 Success,Success
 "An error occured:","An error occured:"

@@ -76,7 +76,7 @@ class AssignImage extends \Magento\Backend\App\Action
         if (!is_writable($categoryDir)) {
             return $this->getResponse()->setBody(
                 $this->jsonEncoder->encode(array(
-                    'error' => __('%s is not writable', $categoryDir)
+                    'error' => __('%1 is not writable', $categoryDir)
                 ))
             );
         }
