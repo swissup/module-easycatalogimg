@@ -70,6 +70,9 @@ class AssignImage extends \Magento\Backend\App\Action
         }
 
         $categoryDir = $this->imageHelper->getBaseDir();
+        if (!file_exists($categoryDir)) {
+            mkdir($categoryDir, 0777, true);
+        }
         if (!is_writable($categoryDir)) {
             return $this->getResponse()->setBody(
                 $this->jsonEncoder->encode(array(
