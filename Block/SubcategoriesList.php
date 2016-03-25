@@ -310,4 +310,13 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     {
         return $this->mime->getMimeType($filepath) == "image/svg+xml";
     }
+    /**
+     * Fix for widget instance
+     *
+     * @return boolean
+     */
+    public function getResizeImage()
+    {
+        return $this->configHelper->useImageResizeHelper();
+    }
 }
