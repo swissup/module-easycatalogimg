@@ -42,25 +42,29 @@ $i = 0;
                     />
                 <?php else:
                     $imagePath = $block->getImage($_category, 'path');
-                    $isSvg = $block->isSvg($imagePath);
-                    if ($isSvg) {
-                        $image1 = $image2 = $block->getImage($_category, 'url');
-                        $style = '';
-                        if (!empty($width)) {
-                            $style = 'max-width: ' . (is_numeric($width) ? $width . 'px' : $width);
-                        } else if (!empty($height)) {
-                            $style = 'max-height: ' . (is_numeric($height) ? $height . 'px' : $height);
+                    if (file_exists($imagePath)) {
+                        $isSvg = $block->isSvg($imagePath);
+                        if ($isSvg) {
+                            $image1 = $image2 = $block->getImage($_category, 'url');
+                            $style = '';
+                            if (!empty($width)) {
+                                $style = 'max-width: ' . (is_numeric($width) ? $width . 'px' : $width);
+                            } else if (!empty($height)) {
+                                $style = 'max-height: ' . (is_numeric($height) ? $height . 'px' : $height);
+                            }
+                        } else {
+                            $image1 = $imager->resize($imagePath, $width, $height);
+                            $image2 = $imager->resize($imagePath, $width * 2, $height * 2);
                         }
                     } else {
-                        $image1 = $imager->resize($imagePath, $width, $height);
-                        $image2 = $imager->resize($imagePath, $width * 2, $height * 2);
+                        $image1 = $image2 = '';
                     } ?>
                     <img src="<?php echo $image1 ?>"
                         srcset="<?php echo $image1 ?> 1x, <?php echo $image2 ?> 2x"
                         width="<?php echo $width ?>"
                         height="<?php echo $height ?>"
                         alt="<?php echo $block->escapeHtml($_category->getName()) ?>"
-                        <?php if ($isSvg): ?>
+                        <?php if (file_exists($imagePath) && $isSvg): ?>
                         style="<?php echo $style ?>"
                         <?php endif; ?>
                     />
