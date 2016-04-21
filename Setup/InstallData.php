@@ -41,7 +41,7 @@ class InstallData implements InstallDataInterface
                 'type' => 'varchar',
                 'label' => 'Thumbnail',
                 'input' => 'image',
-                'backend' => 'Swissup\Easycatalogimg\Model\Category\Attribute\Backend\Image',
+                'backend' => 'Magento\Catalog\Model\Category\Attribute\Backend\Image',
                 'required' => false,
                 'sort_order' => 4,
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
