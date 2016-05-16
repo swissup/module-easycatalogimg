@@ -20,5 +20,10 @@
                 <subcategory_count>5</subcategory_count>
             </category>
         </easycatalogimg>
+        <subscriptionchecker>
+            <ignore>
+                <easycatalogimg/>
+            </ignore>
+        </subscriptionchecker>
     </default>
 </config>
