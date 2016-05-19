@@ -30,12 +30,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      * @var CategoryRepositoryInterface
      */
     protected $categoryRepository;
-    /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
+
     /**
      * Catalog layer
      *
@@ -53,7 +48,6 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      * @param \Swissup\Easycatalogimg\Helper\Config $configHelper
      * @param \Magento\Framework\Registry $registry
      * @param CategoryRepositoryInterface $categoryRepository
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Swissup\Easycatalogimg\Helper\Image $imageHelper
      * @param \Magento\Catalog\Model\Layer\Resolver $layerResolver
      * @param \Magento\Framework\File\Mime $mime
@@ -64,7 +58,6 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         \Swissup\Easycatalogimg\Helper\Config $configHelper,
         \Magento\Framework\Registry $registry,
         CategoryRepositoryInterface $categoryRepository,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Swissup\Easycatalogimg\Helper\Image $imageHelper,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
         \Magento\Framework\File\Mime $mime,
@@ -73,7 +66,6 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         $this->configHelper = $configHelper;
         $this->coreRegistry = $registry;
         $this->categoryRepository = $categoryRepository;
-        $this->storeManager = $storeManager;
         $this->imageHelper = $imageHelper;
         $this->catalogLayer = $layerResolver->get();
         $this->mime = $mime;
@@ -217,7 +209,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      */
     public function getCurrentStore()
     {
-        return $this->storeManager->getStore();
+        return $this->_storeManager->getStore();
     }
     /**
      * Get category thumbnail, image or placeholder url

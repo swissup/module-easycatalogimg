@@ -92,28 +92,10 @@ class Config extends AbstractHelper
      * @var string
      */
     const XML_PATH_CATEGORY_CONFIG = 'easycatalogimg/category';
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $_scopeConfig;
-    /**
-     * Constructor
-     *
-     * @param \Magento\Framework\App\Helper\Context $context
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     */
-    public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    )
-    {
-        parent::__construct($context);
-        $this->_scopeConfig = $scopeConfig;
-    }
+
     protected function _getConfig($key)
     {
-        return $this->_scopeConfig->getValue($key, ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue($key, ScopeInterface::SCOPE_STORE);
     }
     public function useImageAttribute()
     {

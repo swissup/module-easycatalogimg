@@ -39,33 +39,25 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Framework\Filesystem
      */
     protected $fileSystem;
-    /**
-     * url builder
-     *
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $urlBuilder;
+
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Framework\Filesystem\Io\File $ioFile
      * @param \Magento\Framework\Image\Factory $imageFactory
      * @param \Swissup\Easycatalogimg\Helper\Config $configHelper
      * @param \Magento\Framework\Filesystem $fileSystem
-     * @param \Magento\Framework\UrlInterface $urlBuilder
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Framework\Filesystem\Io\File $ioFile,
         \Magento\Framework\Image\Factory $imageFactory,
         \Swissup\Easycatalogimg\Helper\Config $configHelper,
-        \Magento\Framework\Filesystem $fileSystem,
-        UrlInterface $urlBuilder
+        \Magento\Framework\Filesystem $fileSystem
     ) {
         $this->ioFile = $ioFile;
         $this->imageFactory = $imageFactory;
         $this->configHelper = $configHelper;
         $this->fileSystem = $fileSystem;
-        $this->urlBuilder = $urlBuilder;
         parent::__construct($context);
     }
     /**
@@ -149,7 +141,7 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
         $type = UrlInterface::URL_TYPE_MEDIA
     )
     {
-        return $this->urlBuilder
+        return $this->_urlBuilder
             ->getBaseUrl(['_type' => $type]) . $path;
     }
     /**
