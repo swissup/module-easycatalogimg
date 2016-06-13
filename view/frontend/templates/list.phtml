@@ -83,7 +83,7 @@ $i = 0;
                 <?php foreach ($_subcategories as $_subcategory) :
                     if ($_displayMoreLink && ($j > $maxSubcategoryCount - 1)): ?>
                         <li>
-                            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="link-more"><?php echo $this->__('More in %1...', $block->escapeHtml($_category->getName())); ?></a>
+                            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="link-more"><?php echo __('More in %1...', $block->escapeHtml($_category->getName())); ?></a>
                         </li>
                         <?php break;
                     endif; ?>
