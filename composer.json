@@ -2,7 +2,7 @@
     "name": "swissup/easycatalogimg",
     "description": "Easy Catalog Images extension from Swissup",
     "type": "magento2-module",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "license": "OSL-3.0",
     "require": {
         "php": "~5.5.0|~5.6.0|~7.0.0",
