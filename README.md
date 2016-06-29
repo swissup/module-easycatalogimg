@@ -4,8 +4,8 @@
 
 ```bash
 cd <magento_root>
-composer config repositories.swissup/easycatalogimg vcs git@github.com:swissup/easycatalogimg.git
-composer require swissup/easycatalogimg
-bin/magento module:enable Swissup_Easycatalogimg
+composer config repositories.swissup composer https://docs.swissuplabs.com/packages/
+composer require swissup/easycatalogimg --prefer-source
+bin/magento module:enable Swissup_Core Swissup_Easycatalogimg
 bin/magento setup:upgrade
 ```
