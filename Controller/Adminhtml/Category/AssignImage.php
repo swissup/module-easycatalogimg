@@ -139,7 +139,10 @@ class AssignImage extends \Magento\Backend\App\Action
                 copy($source, $destination);
             }
             if (file_exists($destination)) {
-                $category->setThumbnail($image)->save();
+                $category
+                    ->setStoreId(\Magento\Store\Model\Store::DEFAULT_STORE_ID)
+                    ->setThumbnail($image)
+                    ->save();
             }
         }
 
