@@ -7,7 +7,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Swissup_Core::config" title="Swissup">
+                            <resource id="Swissup_Core::swissup_config">
                                 <resource id="Swissup_Easycatalogimg::config_easycatalogimg" title="Easy Catalog Images" sortOrder="520"/>
                             </resource>
                         </resource>
