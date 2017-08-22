@@ -15,4 +15,16 @@ class SubcategoriesList extends \Swissup\Easycatalogimg\Block\SubcategoriesList
     {
         return true;
     }
+    public function getResizeImage()
+    {
+        $resizeImage = $this->_getData('resize_image');
+
+        if (isset($resizeImage)) {
+            $resize = (bool)$resizeImage;
+        } else {
+            $resize = parent::getResizeImage();
+        }
+
+        return $resize;
+    }
 }
