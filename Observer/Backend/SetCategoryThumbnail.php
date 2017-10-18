@@ -21,7 +21,7 @@ class SetCategoryThumbnail implements \Magento\Framework\Event\ObserverInterface
             if (!empty($thumbnail['delete'])) {
                 $category->setThumbnail(null);
             } else {
-                if (isset($thumbnail[0]['name']) && isset($thumbnail[0]['tmp_name'])) {
+                if (isset($thumbnail[0]['name'])) {
                     $category->setThumbnail($thumbnail[0]['name']);
                     // code below added to execute method afterSave in class
                     // \Magento\Catalog\Model\Category\Attribute\Backend\Image
