@@ -32,12 +32,13 @@ class UpgradeData implements UpgradeDataInterface
         $categorySetup = $this->categorySetupFactory->create(['setup' => $setup]);
         $entityTypeId = $categorySetup->getEntityTypeId(Category::ENTITY);
         $attribute = $categorySetup->getAttribute($entityTypeId, 'thumbnail');
-        if (version_compare($context->getVersion(), '1.0.1', '<')) {
+        if (version_compare($context->getVersion(), '1.0.2', '<')) {
             $categorySetup->updateAttribute(
                 $entityTypeId,
                 $attribute['attribute_id'],
                 'backend_model',
-                'Magento\Catalog\Model\Category\Attribute\Backend\Image'
+                'Magento\Catalog\Model\Category\Attribute\Backend\Image',
+                6
             );
         }
         $setup->endSetup();

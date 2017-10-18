@@ -43,7 +43,7 @@ class InstallData implements InstallDataInterface
                 'input' => 'image',
                 'backend' => 'Magento\Catalog\Model\Category\Attribute\Backend\Image',
                 'required' => false,
-                'sort_order' => 4,
+                'sort_order' => 6,
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
                 'group' => 'General Information',
             ]
