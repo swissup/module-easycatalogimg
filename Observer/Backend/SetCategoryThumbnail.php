@@ -4,6 +4,12 @@ namespace Swissup\Easycatalogimg\Observer\Backend;
 
 class SetCategoryThumbnail implements \Magento\Framework\Event\ObserverInterface
 {
+    /**
+     * @var string
+     */
+    private $additionalData = '_additional_data_';
+
+
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $category = $observer->getCategory();
@@ -17,6 +23,9 @@ class SetCategoryThumbnail implements \Magento\Framework\Event\ObserverInterface
             } else {
                 if (isset($thumbnail[0]['name']) && isset($thumbnail[0]['tmp_name'])) {
                     $category->setThumbnail($thumbnail[0]['name']);
+                    // code below added to execute method afterSave in class
+                    // \Magento\Catalog\Model\Category\Attribute\Backend\Image
+                    $category->setData($this->additionalData . 'thumbnail', $thumbnail);
                 } else {
                     $category->unsThumbnail();
                 }
