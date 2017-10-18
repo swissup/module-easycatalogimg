@@ -15,12 +15,19 @@ class DataProvider
     protected $urlBuilder;
 
     /**
+     * @var \Magento\Catalog\Model\Category\FileInfo
+     */
+    protected $fileInfo;
+
+    /**
      * @param \Swissup\Easycatalogimg\Helper\Image $helper
      */
     public function __construct(
+        \Magento\Catalog\Model\Category\FileInfo $fileInfo,
         \Swissup\Easycatalogimg\Helper\Image $helper,
         \Magento\Framework\UrlInterface $urlBuilder
     ) {
+        $this->fileInfo = $fileInfo;
         $this->helper = $helper;
         $this->urlBuilder = $urlBuilder;
     }
@@ -68,10 +75,24 @@ class DataProvider
                 if ($thumbnail && is_string($thumbnail)) {
                     $url = $this->helper->getBaseUrl() . $thumbnail;
                 }
+                $stat = $this->fileInfo->getStat($thumbnail);
+                $mime = $this->fileInfo->getMimeType($thumbnail);
                 $result[$id]['thumbnail'][0]['name'] = $thumbnail;
                 $result[$id]['thumbnail'][0]['url'] = $url;
+                $result[$id]['thumbnail'][0]['size'] = isset($stat) ? $stat['size'] : 0;
+                $result[$id]['thumbnail'][0]['type'] = $mime;
+            }
+
+            // unset image data if there are no name and url
+            if (isset($result[$id]['image'])) {
+                if (!isset($result[$id]['image'][0]['name'])
+                    || empty($result[$id]['image'][0]['name'])
+                ) {
+                    unset($result[$id]['image']);
+                }
             }
         }
+
         return $result;
     }
 }
