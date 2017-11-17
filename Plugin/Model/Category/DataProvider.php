@@ -3,7 +3,6 @@
 namespace Swissup\Easycatalogimg\Plugin\Model\Category;
 
 use Magento\Framework\App\ObjectManager;
-use Magento\Catalog\Model\Category\FileInfo;
 
 class DataProvider
 {
@@ -18,7 +17,7 @@ class DataProvider
     protected $urlBuilder;
 
     /**
-     * @var FileInfo|null
+     * @var \Magento\Catalog\Model\Category\FileInfo|null
      */
     protected $fileInfo;
 
@@ -103,14 +102,17 @@ class DataProvider
     /**
      * Get FileInfo instance
      *
-     * @return null|FileInfo
+     * @return null|\Magento\Catalog\Model\Category\FileInfo
      */
     private function getFileInfo()
     {
-        if ($this->fileInfo === null && class_exists(FileInfo::class)) {
+        if ($this->fileInfo === null
+            && class_exists(\Magento\Catalog\Model\Category\FileInfo::class)
+        ) {
             // Magento less than 2.2.0 does not have class FileInfo
             // that is why we have to use object manager
-            $this->fileInfo = ObjectManager::getInstance()->get(FileInfo::class);
+            $this->fileInfo = ObjectManager::getInstance()
+                ->get(\Magento\Catalog\Model\Category\FileInfo::class);
         }
         return $this->fileInfo;
     }
