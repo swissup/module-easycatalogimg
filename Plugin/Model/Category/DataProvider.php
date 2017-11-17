@@ -2,6 +2,9 @@
 
 namespace Swissup\Easycatalogimg\Plugin\Model\Category;
 
+use Magento\Framework\App\ObjectManager;
+use Magento\Catalog\Model\Category\FileInfo;
+
 class DataProvider
 {
     /**
@@ -15,7 +18,7 @@ class DataProvider
     protected $urlBuilder;
 
     /**
-     * @var \Magento\Catalog\Model\Category\FileInfo
+     * @var FileInfo|null
      */
     protected $fileInfo;
 
@@ -23,11 +26,9 @@ class DataProvider
      * @param \Swissup\Easycatalogimg\Helper\Image $helper
      */
     public function __construct(
-        \Magento\Catalog\Model\Category\FileInfo $fileInfo,
         \Swissup\Easycatalogimg\Helper\Image $helper,
         \Magento\Framework\UrlInterface $urlBuilder
     ) {
-        $this->fileInfo = $fileInfo;
         $this->helper = $helper;
         $this->urlBuilder = $urlBuilder;
     }
@@ -75,12 +76,15 @@ class DataProvider
                 if ($thumbnail && is_string($thumbnail)) {
                     $url = $this->helper->getBaseUrl() . $thumbnail;
                 }
-                $stat = $this->fileInfo->getStat($thumbnail);
-                $mime = $this->fileInfo->getMimeType($thumbnail);
+
                 $result[$id]['thumbnail'][0]['name'] = $thumbnail;
                 $result[$id]['thumbnail'][0]['url'] = $url;
-                $result[$id]['thumbnail'][0]['size'] = isset($stat) ? $stat['size'] : 0;
-                $result[$id]['thumbnail'][0]['type'] = $mime;
+                if (null !== $this->getFileInfo()) {
+                    $stat = $this->getFileInfo()->getStat($thumbnail);
+                    $mime = $this->getFileInfo()->getMimeType($thumbnail);
+                    $result[$id]['thumbnail'][0]['size'] = isset($stat) ? $stat['size'] : 0;
+                    $result[$id]['thumbnail'][0]['type'] = $mime;
+                }
             }
 
             // unset image data if there are no name and url
@@ -94,5 +98,20 @@ class DataProvider
         }
 
         return $result;
+    }
+
+    /**
+     * Get FileInfo instance
+     *
+     * @return null|FileInfo
+     */
+    private function getFileInfo()
+    {
+        if ($this->fileInfo === null && class_exists(FileInfo::class)) {
+            // Magento less than 2.2.0 does not have class FileInfo
+            // that is why we have to use object manager
+            $this->fileInfo = ObjectManager::getInstance()->get(FileInfo::class);
+        }
+        return $this->fileInfo;
     }
 }
