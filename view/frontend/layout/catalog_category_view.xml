@@ -4,7 +4,7 @@
         <referenceContainer name="category.view.container">
             <block class="Swissup\Easycatalogimg\Block\SubcategoriesList" name="subcategories" template="Swissup_Easycatalogimg::list.phtml" before="-">
                 <arguments>
-                    <argument name="use_data_from_config" xsi:type="boolean">true</argument>
+                    <argument name="import_config_from" xsi:type="string">easycatalogimg/category</argument>
                 </arguments>
             </block>
         </referenceContainer>

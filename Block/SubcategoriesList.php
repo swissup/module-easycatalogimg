@@ -75,13 +75,18 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         $this->mime = $mime;
         parent::__construct($context, $data);
     }
+
     public function _construct()
     {
-        if ($this->getUseDataFromConfig()) {
-            $this->setDataFromConfig();
+        if ($configPath = $this->getImportConfigFrom()) {
+            $config = $this->configHelper->getBlockConfig($configPath);
+            foreach ($config as $key => $value) {
+                 $this->setData($key, $value);
+            }
         }
         return parent::_construct();
     }
+
     /**
      * Return identifiers for produced content
      *
@@ -91,16 +96,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     {
         return ['easycatalogimg_subcategories_list'];
     }
-    /**
-     * Set config from Stores > Configuration
-     */
-    private function setDataFromConfig()
-    {
-        $config = $this->configHelper->getBlockConfig();
-        foreach ($config as $key => $value) {
-             $this->setData($key, $value);
-        }
-    }
+
     /**
     * Opimized method, to get all categories to show
     *

@@ -71,7 +71,37 @@
                 </field>
             </group>
 
-            <group id="automated_image_assignment" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="departments" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Departments page</label>
+                <field id="page_title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page Title</label>
+                </field>
+                <field id="url_path" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>URL Path</label>
+                </field>
+                <field id="category_count" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of categories to show</label>
+                </field>
+                <field id="subcategory_count" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of subcategories to show</label>
+                </field>
+                <field id="column_count" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Columns count</label>
+                    <comment>You can set from 2 to 6 columns</comment>
+                </field>
+                <field id="show_image" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image_width" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image width</label>
+                </field>
+                <field id="image_height" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image height</label>
+                </field>
+            </group>
+
+            <group id="automated_image_assignment" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Automated Image Assignment</label>
                 <comment><![CDATA[You can fill empty category thumbnails with image of first product of corresponding category.<br>If category has attached thumbnail already, it will be skipped.]]></comment>
                 <field id="thumbnail" translate="label" type="checkbox" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

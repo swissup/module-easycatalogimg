@@ -107,6 +107,20 @@ class Config extends AbstractHelper
     const XML_PATH_CATEGORY_CONFIG = 'easycatalogimg/category';
 
     /**
+     * Departments page url
+     *
+     * @var string
+     */
+    const XML_PATH_DEPARTMENTS_URL = 'easycatalogimg/departments/url_path';
+
+    /**
+     * Departments page url
+     *
+     * @var string
+     */
+    const XML_PATH_DEPARTMENTS_TITLE = 'easycatalogimg/departments/page_title';
+
+    /**
      * Get store config value
      *
      * @param  string $key
@@ -224,11 +238,36 @@ class Config extends AbstractHelper
     /**
      * @return array
      */
-    public function getBlockConfig()
+    public function getBlockConfig($configPath)
     {
-        $config = $this->_getConfig(self::XML_PATH_CATEGORY_CONFIG);
+        if (!$configPath) {
+            $configPath = self::XML_PATH_CATEGORY_CONFIG;
+        }
+
+        $config = $this->_getConfig($configPath);
         $config['use_image_attribute'] = $this->useImageAttribute();
         $config['resize_image'] = $this->useImageResizeHelper();
+
         return $config;
+    }
+
+    /**
+     * Get URL to the departmetns page
+     *
+     * @return string
+     */
+    public function getDepartmentsUrlPath()
+    {
+        return (string)$this->_getConfig(self::XML_PATH_DEPARTMENTS_URL);
+    }
+
+    /**
+     * Get departments page title
+     *
+     * @return string
+     */
+    public function getDepartmentsTitle()
+    {
+        return (string)$this->_getConfig(self::XML_PATH_DEPARTMENTS_TITLE);
     }
 }

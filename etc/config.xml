@@ -19,6 +19,16 @@
                 <image_height>200</image_height>
                 <subcategory_count>5</subcategory_count>
             </category>
+            <departments>
+                <page_title>Departments</page_title>
+                <url_path>departments</url_path>
+                <category_count>100</category_count>
+                <subcategory_count>10</subcategory_count>
+                <column_count>4</column_count>
+                <show_image>1</show_image>
+                <image_width>300</image_width>
+                <image_height>300</image_height>
+            </departments>
         </easycatalogimg>
         <subscriptionchecker>
             <ignore>
