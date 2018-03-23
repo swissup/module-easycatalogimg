@@ -51,6 +51,9 @@
                 <field id="category_count" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Number of categories to show</label>
                 </field>
+                <field id="subcategory_count" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of subcategories to show</label>
+                </field>
                 <field id="column_count" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Columns count</label>
                     <comment>You can set from 2 to 6 columns</comment>
@@ -65,9 +68,6 @@
                 </field>
                 <field id="image_height" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Image height</label>
-                </field>
-                <field id="subcategory_count" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Number of subcategories to show</label>
                 </field>
             </group>
 
