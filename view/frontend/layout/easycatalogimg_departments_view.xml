@@ -1,0 +1,22 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="1column"
+      label="Easycatalogimg Departments Page">
+    <body>
+        <attribute name="class" value="easycatalogimg-departments"/>
+        <referenceContainer name="content">
+            <block class="Swissup\Easycatalogimg\Block\SubcategoriesList" name="easycatalogimg.departments" template="Swissup_Easycatalogimg::list.phtml">
+                <arguments>
+                    <argument name="mode" xsi:type="string">masonry</argument>
+                    <argument name="parent_category_position" xsi:type="string">bottom</argument>
+                    <argument name="category_count" xsi:type="number">100</argument>
+                    <argument name="subcategory_count" xsi:type="number">10</argument>
+                    <argument name="column_count" xsi:type="number">4</argument>
+                    <argument name="show_image" xsi:type="boolean">true</argument>
+                    <argument name="image_width" xsi:type="number">300</argument>
+                    <argument name="image_height" xsi:type="number">300</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

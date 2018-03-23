@@ -10,6 +10,10 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     \Magento\Framework\DataObject\IdentityInterface,
     \Magento\Widget\Block\BlockInterface
 {
+    const MODE_GRID = 'grid';
+
+    const MODE_MASONRY = 'masonry';
+
     /**
      * Get extension configuration helper
      * @var \Swissup\Easycatalogimg\Helper\Config
@@ -310,5 +314,31 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     public function getResizeImage()
     {
         return $this->configHelper->useImageResizeHelper();
+    }
+
+    /**
+     * Get parent category title placement
+     *
+     * @return string
+     */
+    public function getParentCategoryPosition()
+    {
+        if ($this->hasData('parent_category_position')) {
+            return $this->getData('parent_category_position');
+        }
+        return 'top';
+    }
+
+    /**
+     * Retrieve current listing mode
+     *
+     * @return string
+     */
+    public function getMode()
+    {
+        if ($this->hasData('mode')) {
+            return $this->getData('mode');
+        }
+        return self::MODE_GRID;
     }
 }

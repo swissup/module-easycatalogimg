@@ -1,33 +1,37 @@
 <?php
-$_categories     = $block->getCategories();
-$_collectionSize = count($_categories);
-if (!$_collectionSize) return;
-$imager = $block->imageHelper;
-if ($background = $this->getBackgroundColor()) {
-    $imager->setBackgroundColor($background);
-}
-$columnsCount = $block->getColumnCount();
-$showImage    = $block->getShowImage();
-$height       = $block->getImageHeight();
-$width        = $block->getImageWidth();
-$maxCategoryCount    = $block->getCategoryCount();
-$maxSubcategoryCount = $block->getSubcategoryCount();
-$i = 0;
+    $_categories = $block->getCategories();
+    $_collectionSize = count($_categories);
+    if (!$_collectionSize) {
+        return;
+    }
+
+    $imager = $block->imageHelper;
+    if ($background = $this->getBackgroundColor()) {
+        $imager->setBackgroundColor($background);
+    }
+
+    $columnsCount = $block->getColumnCount();
+    $showImage = $block->getShowImage();
+    $height = $block->getImageHeight();
+    $width = $block->getImageWidth();
+    $maxCategoryCount = $block->getCategoryCount();
+    $maxSubcategoryCount = $block->getSubcategoryCount();
+    $i = 0;
 ?>
 
 <div class="easycatalogimg">
+<ul class="easycatalogimg-listing easycatalogimg-<?php echo $block->getMode() ?> easycatalogimg-cols-<?php echo $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
 
-    <?php if ($i >= $maxCategoryCount): break; endif; ?>
-
-    <?php if($i++%$columnsCount==0): ?>
-    <ul class="easycatalog-grid easycatalogimg-cols-<?php echo $columnsCount ?>">
-    <?php endif; ?>
+    <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
 
     <li class="item">
-        <h5 class="category-name parent-category"><a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></h5>
+        <?php if ($block->getParentCategoryPosition() === 'top') : ?>
+            <div class="category-name parent-category parent-category-top"><a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
+        <?php endif ?>
+
         <?php if ($showImage) : ?>
-            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="product-image">
+            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="image">
                 <?php if(!$resizeImage = $block->getResizeImage()): ?>
                     <?php
                         $style = '';
@@ -71,6 +75,11 @@ $i = 0;
                 <?php endif; ?>
             </a>
         <?php endif; ?>
+
+        <?php if ($block->getParentCategoryPosition() !== 'top') : ?>
+            <div class="category-name parent-category"><a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
+        <?php endif ?>
+
         <?php
         if ($maxSubcategoryCount) :
             $j = 0;
@@ -102,9 +111,6 @@ $i = 0;
         endif; ?>
     </li>
 
-    <?php if($i%$columnsCount==0 || $i==$_collectionSize): ?>
-    </ul>
-    <?php endif; ?>
-
 <?php endforeach; ?>
+</ul>
 </div>
