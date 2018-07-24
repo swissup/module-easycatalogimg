@@ -1,0 +1,53 @@
+$easycatalogimg-item-border: 0 !default;
+
+$easycatalogimg-item-title-top: $listing-item-padding !default;
+$easycatalogimg-item-title-left: $listing-item-padding !default;
+$easycatalogimg-item-title-padding: 4px 10px !default;
+$easycatalogimg-item-title-background: rgba(255,255,255,0.9) !default;
+
+$easycatalogimg-item-subcategory-background: rgba(255,255,255,0.8) !default;
+$easycatalogimg-item-subcategory-font-size: 0.8em !default;
+
+.easycatalogimg-grid {
+    @extend %listing;
+    @extend %list-unstyled;
+
+    > li {
+        @extend %listing-item;
+
+        position: relative;
+        border: $easycatalogimg-item-border;
+        padding: 0;
+
+        > .category-name {
+            @extend %listing-item-title;
+            z-index: 1;
+            position: absolute;
+            top: $easycatalogimg-item-title-top;
+            @include left($easycatalogimg-item-title-left);
+            padding: $easycatalogimg-item-title-padding;
+            background: $easycatalogimg-item-title-background;
+        }
+    }
+
+    .list-subcategories {
+        z-index: 1;
+        position: absolute;
+        bottom: 5px;
+        @include left(10px);
+
+        > li {
+            @extend %chips;
+
+            text-shadow: none;
+            background: $easycatalogimg-item-subcategory-background;
+            font-size: $easycatalogimg-item-subcategory-font-size;
+            line-height: 1;
+            a {
+                text-decoration: none;
+                white-space: nowrap;
+                color: $listing-item-title-color;
+            }
+        }
+    }
+}

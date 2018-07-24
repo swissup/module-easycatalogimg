@@ -35,5 +35,32 @@
                 <easycatalogimg/>
             </ignore>
         </subscriptionchecker>
+        <swissup_amp>
+            <whitelist>
+                <layout_updates>
+                    <easycatalogimg>Swissup_Easycatalogimg</easycatalogimg>
+                </layout_updates>
+                <block_types>
+                    <easycatalogimg>
+                        <list>
+                            <class>Swissup\Easycatalogimg\Block\SubcategoriesList</class>
+                        </list>
+                        <widget_list>
+                            <class>Swissup\Easycatalogimg\Block\Widget\SubcategoriesList</class>
+                        </widget_list>
+                    </easycatalogimg>
+                </block_types>
+            </whitelist>
+            <includes>
+                <blocks>
+                    <easycatalogimg>
+                        <class>Swissup\Easycatalogimg\Block\SubcategoriesList</class>
+                        <styles>
+                            <easycatalogimages>Swissup_Easycatalogimg::easycatalogimg.scss</easycatalogimages>
+                        </styles>
+                    </easycatalogimg>
+                </blocks>
+            </includes>
+        </swissup_amp>
     </default>
 </config>
