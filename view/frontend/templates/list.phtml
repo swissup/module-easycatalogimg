@@ -27,11 +27,11 @@
 
     <li class="item">
         <?php if ($block->getParentCategoryPosition() === 'top') : ?>
-            <div class="category-name parent-category parent-category-top"><a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
+            <div class="category-name parent-category parent-category-top"><a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
         <?php endif ?>
 
         <?php if ($showImage) : ?>
-            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="image">
+            <a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="image">
                 <?php if(!$resizeImage = $block->getResizeImage()): ?>
                     <?php
                         $style = '';
@@ -77,7 +77,7 @@
         <?php endif; ?>
 
         <?php if ($block->getParentCategoryPosition() !== 'top') : ?>
-            <div class="category-name parent-category"><a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
+            <div class="category-name parent-category"><a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
         <?php endif ?>
 
         <?php
@@ -92,12 +92,12 @@
                 <?php foreach ($_subcategories as $_subcategory) :
                     if ($_displayMoreLink && ($j > $maxSubcategoryCount - 1)): ?>
                         <li>
-                            <a href="<?php echo $_category->getUrl() ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="link-more"><?php echo __('More in %1...', $block->escapeHtml($_category->getName())); ?></a>
+                            <a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="link-more"><?php echo __('More in %1...', $block->escapeHtml($_category->getName())); ?></a>
                         </li>
                         <?php break;
                     endif; ?>
                     <li>
-                        <a href="<?php echo $_subcategory->getUrl() ?>"
+                        <a href="<?php echo $this->getCategoryUrl($_subcategory) ?>"
                             title="<?php echo $block->escapeHtml($_subcategory->getName())?>"
                             class="category-name child-category"><?php
                             echo $block->escapeHtml($_subcategory->getName());

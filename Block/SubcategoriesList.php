@@ -117,7 +117,13 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     */
     public function getCategories()
     {
+        $storeId = $this->getCurrentStore()->getId();
         if ($category = $this->getCurrentCategory()) {
+            // fix for categories from another store
+            if ($this->getCategoryId()) {
+                $storeId = $this->detectStoreId($category);
+            }
+
             $currentLevel = $category->getLevel();
         } else {
             $category = $this->categoryRepository->get($this->getCurrentStore()->getRootCategoryId());
@@ -161,6 +167,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
                 && !in_array($category->getParentId(), $categoriesToShow)) {
                 continue;
             }
+            $category->setStoreId($storeId);
             if ($category->getLevel() == ($currentLevel + 1)) {
                 $result[$category->getId()] = $category;
             } else {
@@ -176,6 +183,42 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
         return $result;
     }
+
+    /**
+     * Detect store_id to use, in case of rendering categories on the site with
+     * different root category id
+     *
+     * @param  \Magento\Catalog\Model\Category $category - Category from Widget parameters
+     * @return int
+     */
+    public function detectStoreId($category)
+    {
+        $store = $this->getCurrentStore();
+        $path = explode('/', $category->getPath());
+        $rootCategoryId = $path[1];
+
+        if ($store->getRootCategoryId() == $rootCategoryId) {
+            return $store->getId();
+        }
+
+        $storeIdToWebsiteId = [];
+        foreach ($this->_storeManager->getGroups() as $group) {
+            if ($group->getRootCategoryId() != $rootCategoryId) {
+                continue;
+            }
+
+            $storeIdToWebsiteId[$group->getDefaultStoreId()] = $group->getWebsiteId();
+        }
+
+        foreach ($storeIdToWebsiteId as $storeId => $websiteId) {
+            if ($store->getWebsiteId() == $websiteId) {
+                return $storeId;
+            }
+        }
+
+        return key($storeIdToWebsiteId);
+    }
+
     /**
      * Retrieve current category model object
      *
@@ -336,5 +379,31 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
             return $this->getData('mode');
         }
         return self::MODE_GRID;
+    }
+
+    /**
+     * Added to support crosssite links (link to category to another store_group)
+     *
+     * @param  \Magento\Catalog\Model\Category $category
+     * @return string
+     */
+    public function getCategoryUrl($category)
+    {
+        $url = $category->getUrl();
+
+        $categoryStoreId = $category->getStoreId(); // @see getCategories method
+        if ($categoryStoreId != $this->getCurrentStore()->getId()) {
+            if (strpos($url, '?') !== false) {
+                $prefix = '&';
+            } else {
+                $prefix = '?';
+            }
+
+            $url .= $prefix
+                . '___store='
+                . $this->_storeManager->getStore($categoryStoreId)->getCode();
+        }
+
+        return $url;
     }
 }
