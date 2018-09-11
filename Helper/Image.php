@@ -73,6 +73,14 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
         if (!$imageFile) {
             return false;
         }
+
+        if (!$width) {
+            $width = 200;
+        }
+        if (!$height) {
+            $height = null;
+        }
+
         $imageName = substr(strrchr($imageFile, "/"), 1);
         if ('255,255,255' !== $this->getBackgroundColor(true)) {
             $sizeDir = $width . 'x' . $height . '/' . $this->getBackgroundColor(true) . '/';
