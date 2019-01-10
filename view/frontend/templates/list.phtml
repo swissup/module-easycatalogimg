@@ -81,10 +81,10 @@
         <?php endif ?>
 
         <?php
-        if ($maxSubcategoryCount) :
+        $_subcategories = $_category->getSubcategories();
+        if ($maxSubcategoryCount && $_subcategories) :
             $j = 0;
-            $_subcategories = $_category->getSubcategories();
-            $_count         = count($_subcategories);
+            $_count = count($_subcategories);
             // display More link, if more than one subcategory is not shown, otherwise - display last category
             $_displayMoreLink = $_count > $maxSubcategoryCount + 1;
             if ($_count) : ?>
