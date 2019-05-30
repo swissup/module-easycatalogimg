@@ -32,7 +32,7 @@ class DataProvider
         $this->urlBuilder = $urlBuilder;
     }
 
-    public function afterGetMeta(
+    public function afterPrepareMeta(
         \Magento\Catalog\Model\Category\DataProvider $subject,
         $result
     ) {
