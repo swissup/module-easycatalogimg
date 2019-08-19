@@ -11,7 +11,7 @@
     }
 
     $columnsCount = $block->getColumnCount();
-    $isForceLayout = $block->getLayoutStyle() == 'force';
+    $linkAsButton = $block->getLinkAsButton();
     $showImage = $block->getShowImage();
     $height = $block->getImageHeight();
     $width = $block->getImageWidth();
@@ -28,14 +28,14 @@
 
     <li class="item">
         <?php if ($block->getParentCategoryPosition() === 'top') : ?>
-        <?php if ($isForceLayout): ?>
-        <div class="category-name parent-category">
-            <h2 class="name"><?php echo $block->escapeHtml($_category->getName()) ?></h2>
-            <div class="category-link"><a class="action primary" href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><span><?= __('Shop Now') ?></span></a></div>
-        </div>
-        <?php else: ?>
-        <div class="category-name parent-category parent-category-top"><a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
-        <?php endif ?>
+            <?php if ($linkAsButton): ?>
+                <div class="category-name parent-category">
+                    <h2 class="name"><?php echo $block->escapeHtml($_category->getName()) ?></h2>
+                    <div class="category-link"><a class="action primary" href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><span><?= __('Shop Now') ?></span></a></div>
+                </div>
+            <?php else: ?>
+                <div class="category-name parent-category parent-category-top"><a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
+            <?php endif ?>
         <?php endif ?>
 
         <?php if ($showImage) : ?>
