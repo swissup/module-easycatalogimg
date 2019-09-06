@@ -5,8 +5,8 @@
         margin: 0;
 
         .item {
-            width: 50%;
-            margin: 0;
+            width: ~"calc(50% - @{easycatalogimg-grid-item__margin}*2)";
+            margin: @easycatalogimg-grid-item__margin;
             padding: @easycatalogimg-grid-item__padding;
         }
 
@@ -15,7 +15,7 @@
             .generate-columns(@n, @i: 2) when (@i =< @n) {
                 &.easycatalogimg-cols-@{i} {
                     .item {
-                        width: 100% / @i;
+                        width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
                     }
                 }
                 .generate-columns(@n, (@i + 1));
@@ -23,7 +23,7 @@
             &.easycatalogimg-cols-5,
             &.easycatalogimg-cols-6 {
                 .item {
-                    width: 100% / 4;
+                    width: ~"calc(100% / 4 - @{easycatalogimg-grid-item__margin}*2)";
                 }
             }
         }
@@ -32,7 +32,7 @@
             .generate-columns(6);
             .generate-columns(@n, @i: 2) when (@i =< @n) {
                 &.easycatalogimg-cols-@{i} .item {
-                    width: 100% / @i;
+                    width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
                 }
                 .generate-columns(@n, (@i + 1));
             }
