@@ -7,7 +7,7 @@
         "subcategory listing"
     ],
     "type": "magento2-module",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "license": "OSL-3.0",
     "require": {
         "swissup/module-core": "^1.8.6"
