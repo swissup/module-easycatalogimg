@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <easycatalogimg>
             <general>
@@ -7,6 +8,7 @@
                 <resize_image>1</resize_image>
                 <background>255,255,255</background>
                 <placeholder></placeholder>
+                <placeholder_svg><![CDATA[<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect fill="#f4f4f4" width="1" height="1"/></svg>]]></placeholder_svg>
             </general>
             <category>
                 <enabled_for_default>0</enabled_for_default>

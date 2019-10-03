@@ -15,20 +15,16 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     const MODE_MASONRY = 'masonry';
 
     /**
-     * Get extension configuration helper
      * @var \Swissup\Easycatalogimg\Helper\Config
      */
-    public $configHelper;
+    protected $configHelper;
 
     /**
-     * Get extension image helper
      * @var \Swissup\Easycatalogimg\Helper\Image
      */
-    public $imageHelper;
+    protected $imageHelper;
 
     /**
-     * Core registry
-     *
      * @var \Magento\Framework\Registry
      */
     protected $coreRegistry = null;
@@ -39,8 +35,6 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     protected $categoryRepository;
 
     /**
-     * Catalog layer
-     *
      * @var \Magento\Catalog\Model\Layer
      */
     protected $catalogLayer;
@@ -274,58 +268,84 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     }
 
     /**
-     * Get category thumbnail, image or placeholder url
-     * @param String $type get url or path
-     * @param \Magento\Catalog\Model\Category $category
-     * @return String image url
+     * @return \Swissup\Easycatalogimg\Helper\Image
      */
-    public function getImage($category, $type)
+    public function getImageHelper()
     {
-        $url = '';
-
-        if ($type === 'url') {
-            $prefix = $this->imageHelper->getBaseUrl();
-        } elseif ($type === 'path') {
-            $prefix = $this->imageHelper->getBaseDir();
+        if ($background = $this->getBackgroundColor()) {
+            $this->imageHelper->setBackgroundColor($background);
         }
-
-        if ($image = $category->getThumbnail()) {
-            $url = $prefix . $image;
-        } elseif ($this->getUseImageAttribute() && $image = $category->getImage()) {
-            $url = $prefix . $image;
-        } else {
-            $url = $this->getImagePlaceholder($type);
-        }
-
-        return $url;
+        return $this->imageHelper;
     }
 
     /**
-     * Get category image placeholder
-     * @param String $type get url or path
-     * @return String image url
+     * @param \Magento\Catalog\Model\Category $category
+     * @param integer $width
+     * @param integer $height
+     * @return string
      */
-    public function getImagePlaceholder($type)
+    public function getImageSrc($category, $width, $height)
     {
-        if ($type === 'url') {
-            $prefix = $this->imageHelper->getBaseUrl(Placeholder::UPLOAD_DIR);
-        } elseif ($type === 'path') {
-            $prefix = $this->imageHelper->getBaseDir(Placeholder::UPLOAD_DIR);
+        $image = $category->getThumbnail();
+        $folder = $this->imageHelper->getBaseDir();
+        $baseUrl = $this->imageHelper->getBaseUrl();
+
+        if (!$image && $this->getUseImageAttribute()) {
+            $image = $category->getImage();
         }
 
-        $url = $this->configHelper->getPlaceholderImage();
-        if ($url) {
-            $url = $prefix . '/' . $url;
-        } else {
-            $url = $this->getViewFileUrl('Swissup_Easycatalogimg::images/placeholder.svg');
-            if ($type === 'path') {
-                $staticUrl = $this->imageHelper->getBaseUrl('', UrlInterface::URL_TYPE_STATIC);
-                $staticDir = $this->imageHelper->getBaseDir('', DirectoryList::STATIC_VIEW);
-                $url = str_replace($staticUrl, $staticDir, $url);
-            }
+        if (!$image) {
+            $image = $this->configHelper->getPlaceholderImage();
+            $folder = $this->imageHelper->getBaseDir(Placeholder::UPLOAD_DIR . '/');
+            $baseUrl = $this->imageHelper->getBaseUrl(Placeholder::UPLOAD_DIR . '/');
         }
 
-        return $url;
+        $imagePath = $folder . $image;
+
+        if (!$image || !file_exists($imagePath)) {
+            return $this->configHelper->getPlaceholderSvg(true);
+        }
+
+        if (!$this->getResizeImage() || $this->isSvg($imagePath)) {
+            return $baseUrl . $image;
+        }
+
+        return $this->getImageHelper()->resize($imagePath, $width, $height);
+    }
+
+    /**
+     * @param \Magento\Catalog\Model\Category $category
+     * @param integer $width
+     * @param integer $height
+     * @return string
+     */
+    public function getImageSrcset($category, $width, $height)
+    {
+        if (!$width && !$height) {
+            return '';
+        }
+
+        $x1 = $this->getImageSrc($category, $width, $height);
+        $x2 = $this->getImageSrc($category, $width * 2, $height * 2);
+
+        if ($x1 === $x2 ||
+            substr($x1, -4) === '.svg' ||
+            substr($x1, 0, 18) === 'data:image/svg+xml'
+        ) {
+            return '';
+        }
+
+        return sprintf('%s 1x, %s 2x', $x1, $x2);
+    }
+
+    /**
+     * Check if image is svg
+     * @param  String $filepath path to file
+     * @return Boolean
+     */
+    public function isSvg($filepath)
+    {
+        return $this->mime->getMimeType($filepath) === 'image/svg+xml';
     }
 
      /**
@@ -365,16 +385,6 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
 
         return $template;
-    }
-
-    /**
-     * Check if image is svg
-     * @param  String $filepath path to file
-     * @return Boolean
-     */
-    public function isSvg($filepath)
-    {
-        return $this->mime->getMimeType($filepath) === 'image/svg+xml';
     }
 
     /**

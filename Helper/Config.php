@@ -36,6 +36,13 @@ class Config extends AbstractHelper
     const XML_PATH_PLACEHOLDER = 'easycatalogimg/general/placeholder';
 
     /**
+     * Path to store config inline svg placeholder
+     *
+     * @var string
+     */
+    const XML_PATH_PLACEHOLDER_SVG = 'easycatalogimg/general/placeholder_svg';
+
+    /**
      * Path to store config enable for default categories
      *
      * @var string
@@ -161,6 +168,18 @@ class Config extends AbstractHelper
     public function getPlaceholderImage()
     {
         return (string)$this->_getConfig(self::XML_PATH_PLACEHOLDER);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlaceholderSvg($toBase64 = false)
+    {
+        $svg = (string)$this->_getConfig(self::XML_PATH_PLACEHOLDER_SVG);
+        if ($toBase64) {
+            $svg = 'data:image/svg+xml;base64,' . base64_encode($svg);
+        }
+        return $svg;
     }
 
     /**

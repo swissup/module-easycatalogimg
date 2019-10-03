@@ -1,18 +1,11 @@
 <?php
     $_categories = $block->getCategories();
-    $_collectionSize = count($_categories);
-    if (!$_collectionSize) {
+    if (!count($_categories)) {
         return;
-    }
-
-    $imager = $block->imageHelper;
-    if ($background = $this->getBackgroundColor()) {
-        $imager->setBackgroundColor($background);
     }
 
     $columnsCount = $block->getColumnCount();
     $linkAsButton = $block->getLinkAsButton();
-    $showImage = $block->getShowImage();
     $height = $block->getImageHeight();
     $width = $block->getImageWidth();
     $maxCategoryCount = $block->getCategoryCount();
@@ -38,50 +31,27 @@
             <?php endif ?>
         <?php endif ?>
 
-        <?php if ($showImage) : ?>
-            <a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="image">
-                <?php if (!$resizeImage = $block->getResizeImage()) : ?>
-                    <?php
-                        $style = '';
-                        if (!empty($width)):
-                            $style = 'width: ' . (is_numeric($width) ? $width . 'px' : $width);
-                        elseif (!empty($height)):
-                            $style = 'height: ' . (is_numeric($height) ? $height . 'px' : $height);
-                        endif;
-                    ?>
-                    <img src="<?php echo $block->getImage($_category, 'url') ?>"
-                        style="<?php echo $style ?>" alt="<?php echo $block->escapeHtml($_category->getName()) ?>"
-                    />
-                <?php else:
-                    $imagePath = $block->getImage($_category, 'path');
-                    if (file_exists($imagePath)) {
-                        $isSvg = $block->isSvg($imagePath);
-                        if ($isSvg) {
-                            $image1 = $image2 = $block->getImage($_category, 'url');
-                            $style = '';
-                            if (!empty($width)) {
-                                $style = 'max-width: ' . (is_numeric($width) ? $width . 'px' : $width);
-                            } else if (!empty($height)) {
-                                $style = 'max-height: ' . (is_numeric($height) ? $height . 'px' : $height);
-                            }
-                        } else {
-                            $image1 = $imager->resize($imagePath, $width, $height);
-                            $image2 = $imager->resize($imagePath, $width * 2, $height * 2);
-                        }
-                    } else {
-                        $image1 = $image2 = '';
-                    } ?>
-                    <img src="<?php echo $image1 ?>"
-                        srcset="<?php echo $image1 ?> 1x, <?php echo $image2 ?> 2x"
-                        width="<?php echo $width ?>"
-                        height="<?php echo $height ?>"
-                        alt="<?php echo $block->escapeHtml($_category->getName()) ?>"
-                        <?php if (file_exists($imagePath) && $isSvg): ?>
-                        style="<?php echo $style ?>"
-                        <?php endif; ?>
-                    />
-                <?php endif; ?>
-            </a>
+        <?php if ($block->getShowImage()) : ?>
+            <?php
+                $style = '';
+                if (!empty($width)) {
+                    $style = 'width: ' . (is_numeric($width) ? $width . 'px' : $width);
+                } else if (!empty($height)) {
+                    $style = 'height: ' . (is_numeric($height) ? $height . 'px' : $height);
+                }
+                $srcset = $this->getImageSrcset($_category, $width, $height);
+            ?>
+
+            <a href="<?php echo $this->getCategoryUrl($_category) ?>"
+                title="<?php echo $block->escapeHtml($_category->getName()) ?>"
+                class="image"
+            ><img alt="<?php echo $block->escapeHtml($_category->getName()) ?>"
+                src="<?php echo $this->getImageSrc($_category, $width, $height) ?>"
+                <?php echo $srcset ? 'srcset="' . $srcset . '"' : '' ?>
+                <?php echo $width  ? 'width="' . $width . '"' : '' ?>
+                <?php echo $height ? 'height="' . $height . '"' : '' ?>
+                <?php echo $style  ? 'style="' . $style . '"' : '' ?>
+            /></a>
         <?php endif; ?>
 
         <?php if ($block->getParentCategoryPosition() !== 'top') : ?>
