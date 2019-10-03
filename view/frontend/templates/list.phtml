@@ -40,7 +40,7 @@
 
         <?php if ($showImage) : ?>
             <a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="image">
-                <?php if(!$resizeImage = $block->getResizeImage()): ?>
+                <?php if (!$resizeImage = $block->getResizeImage()) : ?>
                     <?php
                         $style = '';
                         if (!empty($width)):

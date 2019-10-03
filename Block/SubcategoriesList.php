@@ -308,11 +308,9 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     public function getImagePlaceholder($type)
     {
         if ($type === 'url') {
-            $prefix = $this->imageHelper
-            ->getBaseUrl(Placeholder::UPLOAD_DIR);
+            $prefix = $this->imageHelper->getBaseUrl(Placeholder::UPLOAD_DIR);
         } elseif ($type === 'path') {
-            $prefix = $this->imageHelper
-            ->getBaseDir(Placeholder::UPLOAD_DIR);
+            $prefix = $this->imageHelper->getBaseDir(Placeholder::UPLOAD_DIR);
         }
 
         $url = $this->configHelper->getPlaceholderImage();
