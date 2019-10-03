@@ -19,17 +19,20 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      * @var \Swissup\Easycatalogimg\Helper\Config
      */
     public $configHelper;
+
     /**
      * Get extension image helper
      * @var \Swissup\Easycatalogimg\Helper\Image
      */
     public $imageHelper;
+
     /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
      */
     protected $coreRegistry = null;
+
     /**
      * @var CategoryRepositoryInterface
      */
@@ -41,13 +44,13 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      * @var \Magento\Catalog\Model\Layer
      */
     protected $catalogLayer;
+
     /**
      * @var \Magento\Framework\File\Mime
      */
     private $mime;
+
     /**
-     * Construct
-     *
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Swissup\Easycatalogimg\Helper\Config $configHelper
      * @param \Magento\Framework\Registry $registry
@@ -73,6 +76,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         $this->imageHelper = $imageHelper;
         $this->catalogLayer = $layerResolver->get();
         $this->mime = $mime;
+
         parent::__construct($context, $data);
     }
 
@@ -129,10 +133,12 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
             $category = $this->categoryRepository->get($this->getCurrentStore()->getRootCategoryId());
             $currentLevel = 1;
         }
+
         $collection = $category->getCollection();
         if ($category->getId()) {
             $collection->addPathsFilter($category->getPath() . '/');
         }
+
         $collection
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('image')
@@ -145,28 +151,33 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
             ->setOrder('level', \Magento\Framework\Data\Collection::SORT_ORDER_ASC)
             ->setOrder('position', \Magento\Framework\Data\Collection::SORT_ORDER_ASC)
             ->load();
+
         // the next loops is working for two levels only
         if ($categoriesToShow = $this->getCategoryToShow()) {
             $categoriesToShow = explode(',', $categoriesToShow);
         } else {
             $categoriesToShow = [];
         }
+
         if ($categoriesToHide = $this->getCategoryToHide()) {
             $categoriesToHide = explode(',', $categoriesToHide);
         } else {
             $categoriesToHide = [];
         }
+
         $result        = [];
         $subcategories = [];
         foreach ($collection as $category) {
             if (in_array($category->getId(), $categoriesToHide)) {
                 continue;
             }
+
             if ($categoriesToShow
                 && !in_array($category->getId(), $categoriesToShow)
                 && !in_array($category->getParentId(), $categoriesToShow)) {
                 continue;
             }
+
             $category->setStoreId($storeId);
             if ($category->getLevel() == ($currentLevel + 1)) {
                 $result[$category->getId()] = $category;
@@ -174,13 +185,16 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
                 $subcategories[$category->getParentId()][] = $category;
             }
         }
+
         foreach ($subcategories as $parentId => $_subcategories) {
             if (!isset($result[$parentId])) { // inactive parent category
                 continue;
             }
+
             $parent = $result[$parentId];
             $parent->setSubcategories($_subcategories);
         }
+
         return $result;
     }
 
@@ -229,11 +243,14 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         if ($categoryId = $this->getCategoryId()) {
             return $this->categoryRepository->get($categoryId);
         }
+
         if (!$this->hasData('current_category')) {
             $this->setData('current_category', $this->coreRegistry->registry('current_category'));
         }
+
         return $this->getData('current_category');
     }
+
     /**
      * @return int
      */
@@ -245,6 +262,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
         return $id;
     }
+
     /**
      * Retrieve current store model
      *
@@ -254,6 +272,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     {
         return $this->_storeManager->getStore();
     }
+
     /**
      * Get category thumbnail, image or placeholder url
      * @param String $type get url or path
@@ -262,12 +281,14 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      */
     public function getImage($category, $type)
     {
-        $url = false;
-        if ($type == 'url') {
+        $url = '';
+
+        if ($type === 'url') {
             $prefix = $this->imageHelper->getBaseUrl();
-        } elseif ($type == 'path') {
+        } elseif ($type === 'path') {
             $prefix = $this->imageHelper->getBaseDir();
         }
+
         if ($image = $category->getThumbnail()) {
             $url = $prefix . $image;
         } elseif ($this->getUseImageAttribute() && $image = $category->getImage()) {
@@ -275,8 +296,10 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         } else {
             $url = $this->getImagePlaceholder($type);
         }
+
         return $url;
     }
+
     /**
      * Get category image placeholder
      * @param String $type get url or path
@@ -284,26 +307,29 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      */
     public function getImagePlaceholder($type)
     {
-        if ($type == 'url') {
+        if ($type === 'url') {
             $prefix = $this->imageHelper
             ->getBaseUrl(Placeholder::UPLOAD_DIR);
-        } elseif ($type == 'path') {
+        } elseif ($type === 'path') {
             $prefix = $this->imageHelper
             ->getBaseDir(Placeholder::UPLOAD_DIR);
         }
+
         $url = $this->configHelper->getPlaceholderImage();
         if ($url) {
             $url = $prefix . '/' . $url;
         } else {
             $url = $this->getViewFileUrl('Swissup_Easycatalogimg::images/placeholder.svg');
-            if ($type == 'path') {
+            if ($type === 'path') {
                 $staticUrl = $this->imageHelper->getBaseUrl('', UrlInterface::URL_TYPE_STATIC);
                 $staticDir = $this->imageHelper->getBaseDir('', DirectoryList::STATIC_VIEW);
                 $url = str_replace($staticUrl, $staticDir, $url);
             }
         }
+
         return $url;
     }
+
      /**
      * Get relevant path to template
      * don't show the block:
@@ -315,27 +341,34 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     public function getTemplate()
     {
         $page = (int) $this->getRequest()->getParam('p', 1);
+
         if ($this->getHideWhenFilterIsUsed() &&
             ($page > 1 || count($this->catalogLayer->getState()->getFilters()))
         ) {
             return '';
         }
+
         $category = $this->getCurrentCategory();
         if ($category && $category->getLevel() > 1) {
-            $isAnchor          = $category->getIsAnchor();
-            $enabledForAnchor  = $this->getEnabledForAnchor();
+            $isAnchor = $category->getIsAnchor();
+            $enabledForAnchor = $this->getEnabledForAnchor();
             $enabledForDefault = $this->getEnabledForDefault();
+
             if (($isAnchor && !$enabledForAnchor)
-                || (!$isAnchor && !$enabledForDefault)) {
+                || (!$isAnchor && !$enabledForDefault)
+            ) {
                 return '';
             }
         }
+
         $template = parent::getTemplate();
         if (!$template) {
             $template = $this->_getData('template');
         }
+
         return $template;
     }
+
     /**
      * Check if image is svg
      * @param  String $filepath path to file
@@ -343,8 +376,9 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      */
     public function isSvg($filepath)
     {
-        return $this->mime->getMimeType($filepath) == "image/svg+xml";
+        return $this->mime->getMimeType($filepath) === 'image/svg+xml';
     }
+
     /**
      * Fix for widget instance
      *
