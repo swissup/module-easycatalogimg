@@ -26,6 +26,15 @@
                 "docs"     : "http://docs.swissuplabs.com/m2/extensions/easycatalogimages/",
                 "changelog": "http://docs.swissuplabs.com/m2/extensions/easycatalogimages/changelog/"
             }
+        },
+        "marketplace": {
+            "gallery": [
+                "https://docs.swissuplabs.com/images/marketplace/module-easycatalogimages.png"
+            ],
+            "links": {
+                "docs": "https://docs.swissuplabs.com/m2/extensions/easycatalogimages/",
+                "changelog": "https://docs.swissuplabs.com/m2/extensions/easycatalogimages/changelog/"
+            }
         }
     }
 }
