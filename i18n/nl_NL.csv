@@ -1,1 +1,29 @@
- 
+Run,Rennen
+"Please select the checkbox above","Selecteer het bovenstaande selectievakje"
+"%1 is not writable","% 1 is niet beschrijfbaar"
+"More in %1...","Meer in% 1 ..."
+"Completed. {count} items were processed.","Voltooid. {count} items zijn verwerkt."
+Success,Succes
+"An error occured:","Er is een fout opgetreden:"
+"Easy Catalog Images","Gemakkelijke catalogusafbeeldingen"
+"Use category image, when thumbnail is not available","Gebruik categorie afbeelding, wanneer miniatuur niet beschikbaar is"
+"Use image helper to resize images","Gebruik afbeeldingshulp om afbeeldingen van formaat te veranderen"
+"Background color","Achtergrond kleur"
+"Image placeholder","Tijdelijke aanduiding voor afbeelding"
+"Allowed file types:PNG, GIF, JPG, JPEG, SVG.","Toegestane bestandstypen: PNG, GIF, JPG, JPEG, SVG."
+"Category page",Categoriepagina
+"Enabled for default categories","Ingeschakeld voor standaardcategorieën"
+"Enabled for anchor categories","Ingeschakeld voor ankercategorieën"
+"Hidden, when filter or pagination is used","Verborgen, wanneer filter of paginering wordt gebruikt"
+"Number of categories to show","Aantal weer te geven categorieën"
+"Columns count","Kolommen tellen"
+"Show images","Afbeeldingen weergeven"
+"Image width",Beeldbreedte
+"Image height","Hoogte van afbeelding"
+"Number of subcategories to show","Aantal weer te geven subcategorieën"
+"Automated Image Assignment","Geautomatiseerde beeldtoewijzing"
+"Fill category thumbnails","Miniaturen van categorieën vullen"
+"Search in child categories","Zoek in kindcategorieën"
+"Select Category...","Selecteer categorie..."
+"Categories to show","Weer te geven categorieën"
+"Categories to hide","Categorieën om te verbergen"
