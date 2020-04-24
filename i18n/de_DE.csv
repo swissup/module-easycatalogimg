@@ -1,1 +1,29 @@
- 
+Run,Lauf
+"Please select the checkbox above","Bitte aktivieren Sie das Kontrollkästchen oben"
+"%1 is not writable","% 1 ist nicht beschreibbar"
+"More in %1...","Mehr in% 1 ..."
+"Completed. {count} items were processed.","Abgeschlossen. {count} Elemente wurden verarbeitet."
+Success,Erfolg
+"An error occured:","Es ist ein Fehler aufgetreten:"
+"Easy Catalog Images","Einfache Katalogbilder"
+"Use category image, when thumbnail is not available","Verwenden Sie ein Kategoriebild, wenn keine Miniaturansicht verfügbar ist"
+"Use image helper to resize images","Verwenden Sie den Bild-Helfer, um die Größe von Bildern zu ändern"
+"Background color",Hintergrundfarbe
+"Image placeholder","Platzhalter fuer Bild"
+"Allowed file types:PNG, GIF, JPG, JPEG, SVG.","Zulässige Dateitypen: PNG, GIF, JPG, JPEG, SVG."
+"Category page",Kategorieseite
+"Enabled for default categories","Aktiviert für Standardkategorien"
+"Enabled for anchor categories","Aktiviert für Ankerkategorien"
+"Hidden, when filter or pagination is used","Versteckt, wenn Filter oder Paginierung verwendet wird"
+"Number of categories to show","Anzahl der anzuzeigenden Kategorien"
+"Columns count","Spalten zählen"
+"Show images","Bilder anzeigen"
+"Image width","Bild breite"
+"Image height",Bildhöhe
+"Number of subcategories to show","Anzahl der anzuzeigenden Unterkategorien"
+"Automated Image Assignment","Automatisierte Bildzuweisung"
+"Fill category thumbnails","Füllen Sie die Miniaturansichten der Kategorie aus"
+"Search in child categories","Suche in untergeordneten Kategorien"
+"Select Category...","Kategorie wählen..."
+"Categories to show","Zu zeigende Kategorien"
+"Categories to hide","Kategorien zum Ausblenden"
