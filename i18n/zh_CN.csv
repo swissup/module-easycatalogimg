@@ -1,1 +1,29 @@
- 
+Run,跑
+"Please select the checkbox above",请选中上方的复选框
+"%1 is not writable",％1不可写
+"More in %1...",％1中的更多内容...
+"Completed. {count} items were processed.","已完成。 {count}个项目已处理。"
+Success,成功
+"An error occured:",发生错误：
+"Easy Catalog Images",简易目录图像
+"Use category image, when thumbnail is not available",当缩略图不可用时，使用类别图像
+"Use image helper to resize images",使用图像助手调整图像大小
+"Background color",背景颜色
+"Image placeholder",图片占位符
+"Allowed file types:PNG, GIF, JPG, JPEG, SVG.",允许的文件类型：PNG，GIF，JPG，JPEG，SVG。
+"Category page",分类页面
+"Enabled for default categories",为默认类别启用
+"Enabled for anchor categories",为锚类别启用
+"Hidden, when filter or pagination is used",隐藏，使用过滤器或分页时
+"Number of categories to show",显示的类别数
+"Columns count",列数
+"Show images",显示图片
+"Image width",影像宽度
+"Image height",影像高度
+"Number of subcategories to show",要显示的子类别数
+"Automated Image Assignment",自动图像分配
+"Fill category thumbnails",填写类别缩略图
+"Search in child categories",搜索子类别
+"Select Category...",选择类别...
+"Categories to show",显示的类别
+"Categories to hide",隐藏的类别
