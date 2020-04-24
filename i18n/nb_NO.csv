@@ -1,1 +1,29 @@
- 
+Run,Løpe
+"Please select the checkbox above","Merk av for boksen ovenfor"
+"%1 is not writable","% 1 er ikke skrivbar"
+"More in %1...","Mer i% 1 ..."
+"Completed. {count} items were processed.","Fullført. {count} elementer ble behandlet."
+Success,Suksess
+"An error occured:","En feil oppstod:"
+"Easy Catalog Images","Enkel katalogbilder"
+"Use category image, when thumbnail is not available","Bruk kategoribilde når miniatyrbildet ikke er tilgjengelig"
+"Use image helper to resize images","Bruk bildehjelper til å endre størrelse på bilder"
+"Background color",Bakgrunnsfarge
+"Image placeholder","Bilde plassholder"
+"Allowed file types:PNG, GIF, JPG, JPEG, SVG.","Tillatte filtyper: PNG, GIF, JPG, JPEG, SVG."
+"Category page",Kategoriside
+"Enabled for default categories","Aktivert for standardkategorier"
+"Enabled for anchor categories","Aktivert for ankerkategorier"
+"Hidden, when filter or pagination is used","Skjult når filter eller paginering brukes"
+"Number of categories to show","Antall kategorier som skal vises"
+"Columns count","Kolonner teller"
+"Show images","Vis bilder"
+"Image width",Bildebredde
+"Image height",Bildehøyde
+"Number of subcategories to show","Antall underkategorier som skal vises"
+"Automated Image Assignment","Automatisert bildetildeling"
+"Fill category thumbnails","Fyll kategoriminiaturbilder"
+"Search in child categories","Søk i barnekategorier"
+"Select Category...","Velg kategori..."
+"Categories to show","Kategorier å vise"
+"Categories to hide","Kategorier å skjule"
