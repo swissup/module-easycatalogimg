@@ -1,1 +1,29 @@
- 
+Run,Springa
+"Please select the checkbox above","Markera kryssrutan ovan"
+"%1 is not writable","% 1 är inte skrivbart"
+"More in %1...","Mer i% 1 ..."
+"Completed. {count} items were processed.","Avslutad. {count} objekt behandlades."
+Success,Framgång
+"An error occured:","Ett fel inträffade:"
+"Easy Catalog Images","Enkla katalogbilder"
+"Use category image, when thumbnail is not available","Använd kategoribild när miniatyrbild inte är tillgänglig"
+"Use image helper to resize images","Använd bildhjälper för att ändra storlek på bilder"
+"Background color",Bakgrundsfärg
+"Image placeholder",Bildhållare
+"Allowed file types:PNG, GIF, JPG, JPEG, SVG.","Tillåtna filtyper: PNG, GIF, JPG, JPEG, SVG."
+"Category page",Kategorisida
+"Enabled for default categories","Aktiverat för standardkategorier"
+"Enabled for anchor categories","Aktiverat för ankarkategorier"
+"Hidden, when filter or pagination is used","Dold när filter eller paginering används"
+"Number of categories to show","Antal kategorier som ska visas"
+"Columns count","Kolumner räknas"
+"Show images","Visa bilder"
+"Image width",Bildbredd
+"Image height",Bildhöjd
+"Number of subcategories to show","Antal underkategorier som ska visas"
+"Automated Image Assignment","Automatiserad bildtilldelning"
+"Fill category thumbnails","Fyll kategori-miniatyrer"
+"Search in child categories","Sök i barnkategorier"
+"Select Category...","Välj kategori..."
+"Categories to show","Kategorier att visa"
+"Categories to hide","Kategorier att dölja"
