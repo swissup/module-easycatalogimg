@@ -1,1 +1,29 @@
- 
+Run,走る
+"Please select the checkbox above",上のチェックボックスを選択してください
+"%1 is not writable",％1は書き込み可能ではありません
+"More in %1...",％1の詳細...
+"Completed. {count} items were processed.","完了しました。 {count}個のアイテムが処理されました。"
+Success,成功
+"An error occured:",エラーが発生した：
+"Easy Catalog Images",簡単なカタログ画像
+"Use category image, when thumbnail is not available",サムネイルが利用できない場合にカテゴリ画像を使用する
+"Use image helper to resize images",画像ヘルパーを使用して画像のサイズを変更する
+"Background color",背景色
+"Image placeholder",画像プレースホルダー
+"Allowed file types:PNG, GIF, JPG, JPEG, SVG.",許可されているファイル形式：PNG、GIF、JPG、JPEG、SVG。
+"Category page",カテゴリーページ
+"Enabled for default categories",デフォルトのカテゴリで有効
+"Enabled for anchor categories",アンカーカテゴリで有効
+"Hidden, when filter or pagination is used",非表示、フィルターまたはページネーションが使用されている場合
+"Number of categories to show",表示するカテゴリの数
+"Columns count",列数
+"Show images",画像を表示
+"Image width",画像の幅
+"Image height",画像の高さ
+"Number of subcategories to show",表示するサブカテゴリの数
+"Automated Image Assignment",自動画像割り当て
+"Fill category thumbnails",カテゴリのサムネイルを埋める
+"Search in child categories",子カテゴリーで検索
+"Select Category...",カテゴリを選んでください...
+"Categories to show",表示するカテゴリ
+"Categories to hide",非表示にするカテゴリ
