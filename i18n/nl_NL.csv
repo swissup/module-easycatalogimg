@@ -1,7 +1,7 @@
 Run,Rennen
 "Please select the checkbox above","Selecteer het bovenstaande selectievakje"
-"%1 is not writable","% 1 is niet beschrijfbaar"
-"More in %1...","Meer in% 1 ..."
+"%1 is not writable","%1 is niet beschrijfbaar"
+"More in %1...","Meer in %1 ..."
 "Completed. {count} items were processed.","Voltooid. {count} items zijn verwerkt."
 Success,Succes
 "An error occured:","Er is een fout opgetreden:"
