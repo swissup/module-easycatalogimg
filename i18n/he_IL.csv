@@ -1,7 +1,7 @@
 Run,רוץ
 "Please select the checkbox above","אנא בחר בתיבת הסימון למעלה"
-"%1 is not writable","לא ניתן לכתוב% 1"
-"More in %1...","עוד ב-% 1 ..."
+"%1 is not writable","לא ניתן לכתוב %1"
+"More in %1...","עוד ב- %1 ..."
 "Completed. {count} items were processed.","הושלם. {count} פריטים עובדו."
 Success,הצלחה
 "An error occured:","חלה שגיאה:"
