@@ -1,7 +1,7 @@
 Run,운영
 "Please select the checkbox above","위의 확인란을 선택하십시오"
-"%1 is not writable","% 1은 쓰기 가능하지 않습니다"
-"More in %1...","% 1 더보기 ..."
+"%1 is not writable","%1 은 쓰기 가능하지 않습니다"
+"More in %1...","%1  더보기 ..."
 "Completed. {count} items were processed.","완료되었습니다. {count} 개 항목이 처리되었습니다."
 Success,성공
 "An error occured:","오류가 발생했습니다:"
