@@ -1,7 +1,7 @@
 Run,Correre
 "Please select the checkbox above","Seleziona la casella sopra"
-"%1 is not writable","% 1 non è scrivibile"
-"More in %1...","Altro in% 1 ..."
+"%1 is not writable","%1 non è scrivibile"
+"More in %1...","Altro in %1 ..."
 "Completed. {count} items were processed.","Completato. {count} articoli sono stati elaborati."
 Success,Successo
 "An error occured:","Si è verificato un errore:"
