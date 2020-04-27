@@ -1,7 +1,7 @@
 Run,يركض
 "Please select the checkbox above","يرجى تحديد مربع الاختيار أعلاه"
-"%1 is not writable","٪ 1 غير قابل للكتابة"
-"More in %1...","المزيد في٪ 1 ..."
+"%1 is not writable","%1 غير قابل للكتابة"
+"More in %1...","المزيد في %1 ..."
 "Completed. {count} items were processed.","منجز. تمت معالجة {count} من العناصر."
 Success,نجاح
 "An error occured:","حدث خطأ:"
