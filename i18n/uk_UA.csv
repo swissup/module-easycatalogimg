@@ -1,7 +1,7 @@
 Run,Біжи
 "Please select the checkbox above","Установіть прапорець вище"
-"%1 is not writable","% 1 не можна записати"
-"More in %1...","Більше в% 1 ..."
+"%1 is not writable","%1 не можна записати"
+"More in %1...","Більше в %1 ..."
 "Completed. {count} items were processed.","Завершено. {count} елементів було оброблено."
 Success,Успіх
 "An error occured:","Сталася помилка:"
