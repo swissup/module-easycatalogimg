@@ -1,7 +1,7 @@
 Run,Lauf
 "Please select the checkbox above","Bitte aktivieren Sie das Kontrollkästchen oben"
-"%1 is not writable","% 1 ist nicht beschreibbar"
-"More in %1...","Mehr in% 1 ..."
+"%1 is not writable","%1 ist nicht beschreibbar"
+"More in %1...","Mehr in %1 ..."
 "Completed. {count} items were processed.","Abgeschlossen. {count} Elemente wurden verarbeitet."
 Success,Erfolg
 "An error occured:","Es ist ein Fehler aufgetreten:"
