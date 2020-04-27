@@ -1,7 +1,7 @@
 Run,Springa
 "Please select the checkbox above","Markera kryssrutan ovan"
-"%1 is not writable","% 1 är inte skrivbart"
-"More in %1...","Mer i% 1 ..."
+"%1 is not writable","%1 är inte skrivbart"
+"More in %1...","Mer i %1 ..."
 "Completed. {count} items were processed.","Avslutad. {count} objekt behandlades."
 Success,Framgång
 "An error occured:","Ett fel inträffade:"
