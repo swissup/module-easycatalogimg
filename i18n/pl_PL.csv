@@ -1,7 +1,7 @@
 Run,Biegać
 "Please select the checkbox above","Proszę zaznaczyć pole wyboru powyżej"
-"%1 is not writable","% 1 nie jest zapisywalny"
-"More in %1...","Więcej w% 1 ..."
+"%1 is not writable","%1 nie jest zapisywalny"
+"More in %1...","Więcej w %1 ..."
 "Completed. {count} items were processed.","Zakończony. {count} elementy zostały przetworzone."
 Success,Sukces
 "An error occured:","Wystąpił błąd:"
