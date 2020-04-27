@@ -1,7 +1,7 @@
 Run,Corre
 "Please select the checkbox above","Marque a caixa de seleção acima"
-"%1 is not writable","% 1 não é gravável"
-"More in %1...","Mais em% 1 ..."
+"%1 is not writable","%1 não é gravável"
+"More in %1...","Mais em %1 ..."
 "Completed. {count} items were processed.","Concluído. {count} itens foram processados."
 Success,Sucesso
 "An error occured:","Um erro ocorreu:"
