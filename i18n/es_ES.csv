@@ -1,7 +1,7 @@
 Run,correr
 "Please select the checkbox above","Por favor seleccione la casilla de verificación arriba"
-"%1 is not writable","% 1 no se puede escribir"
-"More in %1...","Más en% 1 ..."
+"%1 is not writable","%1 no se puede escribir"
+"More in %1...","Más en %1 ..."
 "Completed. {count} items were processed.","Terminado. Se procesaron {count} artículos."
 Success,Éxito
 "An error occured:","Ocurrió un error:"
