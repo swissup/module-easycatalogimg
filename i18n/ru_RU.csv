@@ -1,7 +1,7 @@
 Run,Пробег
 "Please select the checkbox above","Пожалуйста, установите флажок выше"
-"%1 is not writable","% 1 не доступен для записи"
-"More in %1...","Больше в% 1 ..."
+"%1 is not writable","%1 не доступен для записи"
+"More in %1...","Больше в %1 ..."
 "Completed. {count} items were processed.","Завершено. {count} элементы были обработаны."
 Success,успех
 "An error occured:","Произошла ошибка:"
