@@ -11,6 +11,7 @@ $easycatalogimg-item-subcategory-font-size: 0.8em !default;
 .easycatalogimg-grid {
     @extend %listing;
     @extend %list-unstyled;
+    margin-top: 10px;
 
     > li {
         @extend %listing-item;
