@@ -1,36 +1,38 @@
-.easycatalogimg {
-    &-masonry {
-        column-gap: @easycatalogimg-masonry__gutter;
-        column-count: 2;
+& when (@media-common = true) {
+    .easycatalogimg {
+        &-masonry {
+            column-gap: @easycatalogimg-masonry__gutter;
+            column-count: 2;
 
-        @media (min-width: 1024px) {
-            column-gap: @easycatalogimg-masonry__desktop__gutter;
-        }
-
-        @media (min-width: 768px) {
-            .generate-masonry(6);
-            .generate-masonry(@n, @i: 2) when (@i =< @n) {
-                &.easycatalogimg-cols-@{i} {
-                    column-count: @i;
-                }
-                .generate-masonry(@n, (@i + 1));
-            }
-        }
-        @media (min-width: 768px) and (max-width: 1023px) {
-            &.easycatalogimg-cols-5,
-            &.easycatalogimg-cols-6 {
-                column-count: 4;
-            }
-        }
-
-        .item {
-            background-color: #f7f7f7;
-            display: inline-block;
-            width: 100%;
-            padding: @easycatalogimg-masonry-item__padding;
-            margin: 0 0 @easycatalogimg-masonry__gutter;
             @media (min-width: 1024px) {
-                margin: 0 0 @easycatalogimg-masonry__desktop__gutter;
+                column-gap: @easycatalogimg-masonry__desktop__gutter;
+            }
+
+            @media (min-width: 768px) {
+                .generate-masonry(6);
+                .generate-masonry(@n, @i: 2) when (@i =< @n) {
+                    &.easycatalogimg-cols-@{i} {
+                        column-count: @i;
+                    }
+                    .generate-masonry(@n, (@i + 1));
+                }
+            }
+            @media (min-width: 768px) and (max-width: 1023px) {
+                &.easycatalogimg-cols-5,
+                &.easycatalogimg-cols-6 {
+                    column-count: 4;
+                }
+            }
+
+            .item {
+                background-color: #f7f7f7;
+                display: inline-block;
+                width: 100%;
+                padding: @easycatalogimg-masonry-item__padding;
+                margin: 0 0 @easycatalogimg-masonry__gutter;
+                @media (min-width: 1024px) {
+                    margin: 0 0 @easycatalogimg-masonry__desktop__gutter;
+                }
             }
         }
     }

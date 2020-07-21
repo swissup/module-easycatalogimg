@@ -1,40 +1,42 @@
-.easycatalogimg {
-    &-grid {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0;
+& when (@media-common = true) {
+    .easycatalogimg {
+        &-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
 
-        .item {
-            width: ~"calc(50% - @{easycatalogimg-grid-item__margin}*2)";
-            margin: @easycatalogimg-grid-item__margin;
-            padding: @easycatalogimg-grid-item__padding;
-        }
+            .item {
+                width: ~"calc(50% - @{easycatalogimg-grid-item__margin}*2)";
+                margin: @easycatalogimg-grid-item__margin;
+                padding: @easycatalogimg-grid-item__padding;
+            }
 
-        @media (min-width: 768px) {
-            .generate-columns(4);
-            .generate-columns(@n, @i: 2) when (@i =< @n) {
-                &.easycatalogimg-cols-@{i} {
+            @media (min-width: 768px) {
+                .generate-columns(4);
+                .generate-columns(@n, @i: 2) when (@i =< @n) {
+                    &.easycatalogimg-cols-@{i} {
+                        .item {
+                            width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
+                        }
+                    }
+                    .generate-columns(@n, (@i + 1));
+                }
+                &.easycatalogimg-cols-5,
+                &.easycatalogimg-cols-6 {
                     .item {
-                        width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
+                        width: ~"calc(100% / 4 - @{easycatalogimg-grid-item__margin}*2)";
                     }
                 }
-                .generate-columns(@n, (@i + 1));
             }
-            &.easycatalogimg-cols-5,
-            &.easycatalogimg-cols-6 {
-                .item {
-                    width: ~"calc(100% / 4 - @{easycatalogimg-grid-item__margin}*2)";
-                }
-            }
-        }
 
-        @media (min-width: 1024px) {
-            .generate-columns(6);
-            .generate-columns(@n, @i: 2) when (@i =< @n) {
-                &.easycatalogimg-cols-@{i} .item {
-                    width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
+            @media (min-width: 1024px) {
+                .generate-columns(6);
+                .generate-columns(@n, @i: 2) when (@i =< @n) {
+                    &.easycatalogimg-cols-@{i} .item {
+                        width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
+                    }
+                    .generate-columns(@n, (@i + 1));
                 }
-                .generate-columns(@n, (@i + 1));
             }
         }
     }
