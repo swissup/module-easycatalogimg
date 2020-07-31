@@ -73,6 +73,7 @@ class DataProvider
                 $thumbnail = $category->getData('thumbnail');
                 $url = false;
                 if ($thumbnail && is_string($thumbnail)) {
+                    $thumbnail = $this->helper->prepareThumbnailUrl($thumbnail);
                     $url = $this->helper->getBaseUrl() . $thumbnail;
                 }
 

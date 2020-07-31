@@ -166,4 +166,20 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
             ->getDirectoryWrite($directoryCode)
             ->getAbsolutePath($path);
     }
+
+    /**
+     * Remove directories from thumbnail url
+     * @param  string $thumbnail
+     * @return string
+     */
+    public function prepareThumbnailUrl($thumbnail)
+    {
+        $replace = [
+            $this->fileSystem->getUri(DirectoryList::MEDIA),
+            'catalog/category'
+        ];
+        $url = ltrim(str_replace($replace, '', $thumbnail), '/');
+
+        return $url;
+    }
 }

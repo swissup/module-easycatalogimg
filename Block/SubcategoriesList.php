@@ -287,6 +287,9 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     public function getImageSrc($category, $width, $height)
     {
         $image = $category->getThumbnail();
+        if ($image && is_string($image)) {
+            $image = $this->imageHelper->prepareThumbnailUrl($image);
+        }
         $folder = $this->imageHelper->getBaseDir();
         $baseUrl = $this->imageHelper->getBaseUrl();
 

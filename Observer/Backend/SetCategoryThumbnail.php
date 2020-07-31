@@ -22,7 +22,7 @@ class SetCategoryThumbnail implements \Magento\Framework\Event\ObserverInterface
                 $category->setThumbnail(null);
             } else {
                 if (isset($thumbnail[0]['name'])) {
-                    $category->setThumbnail($thumbnail[0]['name']);
+                    $category->setThumbnail($thumbnail);
                     // code below added to execute method afterSave in class
                     // \Magento\Catalog\Model\Category\Attribute\Backend\Image
                     $category->setData($this->additionalData . 'thumbnail', $thumbnail);
