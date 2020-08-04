@@ -8,7 +8,6 @@
             <block class="Swissup\Easycatalogimg\Block\SubcategoriesList" name="easycatalogimg.departments" template="Swissup_Easycatalogimg::list.phtml">
                 <arguments>
                     <argument name="import_config_from" xsi:type="string">easycatalogimg/departments</argument>
-                    <argument name="mode" xsi:type="string">masonry</argument>
                     <argument name="parent_category_position" xsi:type="string">bottom</argument>
                 </arguments>
             </block>

@@ -24,12 +24,14 @@
             <departments>
                 <page_title>Departments</page_title>
                 <url_path>departments</url_path>
+                <mode>masonry</mode>
                 <category_count>100</category_count>
                 <subcategory_count>10</subcategory_count>
                 <column_count>4</column_count>
                 <show_image>1</show_image>
                 <image_width>300</image_width>
                 <image_height>300</image_height>
+                <category_to_hide></category_to_hide>
             </departments>
         </easycatalogimg>
         <subscriptionchecker>
