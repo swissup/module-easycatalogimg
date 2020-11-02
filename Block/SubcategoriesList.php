@@ -370,7 +370,11 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
 
         $category = $this->getCurrentCategory();
-        if ($category && $category->getLevel() > 1) {
+        if ($category && $category->getLevel() > 0) {
+            if ($category->getLevel() == 1 && $this->getDisabledForRoot()) {
+                return '';
+            }
+
             $isAnchor = $category->getIsAnchor();
             $enabledForAnchor = $this->getEnabledForAnchor();
             $enabledForDefault = $this->getEnabledForDefault();

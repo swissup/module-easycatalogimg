@@ -6,6 +6,7 @@
             <block class="Swissup\Easycatalogimg\Block\SubcategoriesList" name="subcategories" template="Swissup_Easycatalogimg::list.phtml" before="-">
                 <arguments>
                     <argument name="import_config_from" xsi:type="string">easycatalogimg/category</argument>
+                    <argument name="disabled_for_root" xsi:type="boolean">true</argument>
                 </arguments>
             </block>
         </referenceContainer>
