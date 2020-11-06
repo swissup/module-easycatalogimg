@@ -54,9 +54,20 @@
                 <label translate="true">Categories to hide</label>
                 <description>Comma separated ids. Example: 13,17</description>
             </parameter>
-            <parameter name="template" xsi:type="text" required="false" visible="true" sort_order="100">
+            <parameter name="template" xsi:type="select" visible="true" required="true" sort_order="100">
                 <label translate="true">Template</label>
-                <value>Swissup_Easycatalogimg::list.phtml</value>
+                <options>
+                    <option name="default" value="Swissup_Easycatalogimg::list.phtml" selected="true">
+                        <label translate="true">Default Template</label>
+                    </option>
+                    <option name="custom" value="0">
+                        <label translate="true">Custom Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="custom_template" xsi:type="text" required="false" visible="true" sort_order="105">
+                <label translate="true">Custom Template</label>
+                <description translate="true">Used, when template value is set to 'Custom'</description>
             </parameter>
             <parameter name="hide_when_filter_is_used" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="110">
                 <label translate="true">Hidden, when filter or pagination is used</label>

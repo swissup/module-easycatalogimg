@@ -387,8 +387,8 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
 
         $template = parent::getTemplate();
-        if (!$template) {
-            $template = $this->_getData('template');
+        if (empty($template)) {
+            $template = $this->getCustomTemplate();
         }
 
         return $template;
