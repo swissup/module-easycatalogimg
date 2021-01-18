@@ -175,6 +175,7 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
     public function prepareThumbnailUrl($thumbnail)
     {
         $replace = [
+            'pub/' . $this->fileSystem->getUri(DirectoryList::MEDIA),
             $this->fileSystem->getUri(DirectoryList::MEDIA),
             'catalog/category'
         ];
