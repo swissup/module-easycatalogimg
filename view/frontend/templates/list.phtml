@@ -3,7 +3,7 @@
     if (!count($_categories)) {
         return;
     }
-
+    /* @var $block \Swissup\Easycatalogimg\Block\SubcategoriesList */
     $columnsCount = $block->getColumnCount();
     $linkAsButton = $block->getLinkAsButton();
     $height = $block->getImageHeight();
@@ -12,22 +12,27 @@
     $maxSubcategoryCount = $block->getSubcategoryCount();
     $i = 0;
 ?>
-
-<div class="easycatalogimg">
-<ul class="easycatalogimg-listing easycatalogimg-<?php echo $block->getMode() ?> easycatalogimg-cols-<?php echo $columnsCount ?>">
+<div class="easycatalogimg" data-content-type="Easycatalogimg_SubcategoriesList">
+<ul class="easycatalogimg-listing easycatalogimg-<?= $block->getMode() ?> easycatalogimg-cols-<?= $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
-
-    <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
-
-    <li class="item">
+        <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
+        <li class="item">
         <?php if ($block->getParentCategoryPosition() === 'top') : ?>
             <?php if ($linkAsButton): ?>
                 <div class="category-name parent-category">
-                    <h2 class="name"><?php echo $block->escapeHtml($_category->getName()) ?></h2>
-                    <div class="category-link"><a class="action primary" href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><span><?= __('Shop Now') ?></span></a></div>
+                    <h2 class="name"><?= $block->escapeHtml($_category->getName()) ?></h2>
+                    <div class="category-link">
+                        <a class="action primary" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
+                            <span><?= __('Shop Now') ?></span>
+                        </a>
+                    </div>
                 </div>
             <?php else: ?>
-                <div class="category-name parent-category parent-category-top"><a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
+                <div class="category-name parent-category parent-category-top">
+                    <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
+                        <?= $block->escapeHtml($_category->getName()) ?>
+                    </a>
+                </div>
             <?php endif ?>
         <?php endif ?>
 
@@ -39,23 +44,26 @@
                 } else if (!empty($height)) {
                     $style = 'height: ' . (is_numeric($height) ? $height . 'px' : $height);
                 }
-                $srcset = $this->getImageSrcset($_category, $width, $height);
+                $srcset = $block->getImageSrcset($_category, $width, $height);
             ?>
-
-            <a href="<?php echo $this->getCategoryUrl($_category) ?>"
-                title="<?php echo $block->escapeHtml($_category->getName()) ?>"
+            <a href="<?= $block->getCategoryUrl($_category) ?>"
+                title="<?= $block->escapeHtml($_category->getName()) ?>"
                 class="image"
-            ><img alt="<?php echo $block->escapeHtml($_category->getName()) ?>"
-                src="<?php echo $this->getImageSrc($_category, $width, $height) ?>"
-                <?php echo $srcset ? 'srcset="' . $srcset . '"' : '' ?>
-                <?php echo $width  ? 'width="' . $width . '"' : '' ?>
-                <?php echo $height ? 'height="' . $height . '"' : '' ?>
-                <?php echo $style  ? 'style="' . $style . '"' : '' ?>
+            ><img alt="<?= $block->escapeHtml($_category->getName()) ?>"
+                src="<?= $block->getImageSrc($_category, $width, $height) ?>"
+                <?= $srcset ? 'srcset="' . $srcset . '"' : '' ?>
+                <?= $width  ? 'width="' . $width . '"' : '' ?>
+                <?= $height ? 'height="' . $height . '"' : '' ?>
+                <?= $style  ? 'style="' . $style . '"' : '' ?>
             /></a>
         <?php endif; ?>
 
         <?php if ($block->getParentCategoryPosition() !== 'top') : ?>
-            <div class="category-name parent-category"><a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>"><?php echo $block->escapeHtml($_category->getName()) ?></a></div>
+            <div class="category-name parent-category">
+                <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
+                    <?= $block->escapeHtml($_category->getName()) ?>
+                </a>
+            </div>
         <?php endif ?>
 
         <?php
@@ -70,16 +78,18 @@
                 <?php foreach ($_subcategories as $_subcategory) :
                     if ($_displayMoreLink && ($j > $maxSubcategoryCount - 1)): ?>
                         <li>
-                            <a href="<?php echo $this->getCategoryUrl($_category) ?>" title="<?php echo $block->escapeHtml($_category->getName()) ?>" class="link-more"><?php echo __('More in %1...', $block->escapeHtml($_category->getName())); ?></a>
+                            <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>" class="link-more">
+                                <?= __('More in %1...', $block->escapeHtml($_category->getName())); ?>
+                            </a>
                         </li>
                         <?php break;
                     endif; ?>
                     <li>
-                        <a href="<?php echo $this->getCategoryUrl($_subcategory) ?>"
-                            title="<?php echo $block->escapeHtml($_subcategory->getName())?>"
-                            class="category-name child-category"><?php
-                            echo $block->escapeHtml($_subcategory->getName());
-                        ?></a>
+                        <a href="<?= $block->getCategoryUrl($_subcategory) ?>"
+                            title="<?= $block->escapeHtml($_subcategory->getName())?>"
+                            class="category-name child-category">
+                            <?= $block->escapeHtml($_subcategory->getName());?>
+                        </a>
                     </li>
                     <?php $j++; ?>
                 <?php endforeach;?>
