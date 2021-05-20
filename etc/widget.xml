@@ -46,6 +46,13 @@
                 </depends>
                 <value>200</value>
             </parameter>
+            <parameter name="sizes" xsi:type="text" required="false" visible="true" sort_order="75">
+                <label translate="true">Responsive sizes</label>
+                <description>Leave empty to use default sizes. Example: (min-width: 768px) 25vw, 50vw</description>
+                <depends>
+                    <parameter name="show_image" value="1" />
+                </depends>
+            </parameter>
             <parameter name="category_to_show" xsi:type="text" required="false" visible="true" sort_order="80">
                 <label translate="true">Categories to show</label>
                 <description>Comma separated ids. Example: 13,17</description>

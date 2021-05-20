@@ -317,28 +317,127 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     }
 
     /**
-     * @param \Magento\Catalog\Model\Category $category
-     * @param integer $width
-     * @param integer $height
-     * @return string
+     * Build srcset and sizes attributes for image
+     *
+     * @return array[srcset, sizes]
      */
-    public function getImageSrcset($category, $width, $height)
+    public function getResponsiveAttributes($category, $originalWidth, $originalHeight)
     {
-        if (!$width && !$height) {
-            return '';
+        if (!$originalWidth || !$originalHeight || !$this->getResizeImage()) {
+            return ['', ''];
         }
 
-        $x1 = $this->getImageSrc($category, $width, $height);
-        $x2 = $this->getImageSrc($category, $width * 2, $height * 2);
+        $srcset = [];
+        $sizes = [];
+        $screens = [1024, 960, 768, 640, 480, 360];
+        foreach ($screens as $screenWidth) {
+            list($width, $height) = $this->getDimensionsForScreenWidth(
+                $screenWidth,
+                $originalWidth,
+                $originalHeight
+            );
 
-        if ($x1 === $x2 ||
-            substr($x1, -4) === '.svg' ||
-            substr($x1, 0, 18) === 'data:image/svg+xml'
-        ) {
-            return '';
+            if (!$width) {
+                continue;
+            }
+
+            $imageSrc = $this->getImageSrc($category, $width, $height);
+
+            if (substr($imageSrc, -4) === '.svg' ||
+                substr($imageSrc, 0, 18) === 'data:image/svg+xml' // base64 encoded inline image
+            ) {
+                break;
+            }
+
+            $largeWidth = $width * 2;
+            $largeHeight = $height * 2;
+            $largeImageSrc = $this->getImageSrc($category, $largeWidth, $largeHeight);
+
+            $sizes[] = "(min-width: {$screenWidth}px) {$width}px";
+            $srcset[$width] = "{$imageSrc} {$width}w";
+            $srcset[$largeWidth] = "{$largeImageSrc} {$largeWidth}w";
         }
 
-        return sprintf('%s 1x, %s 2x', $x1, $x2);
+        // desktop with HiDPI screen
+        if ($srcset) {
+            $largeWidth = $originalWidth * 2;
+            $largeHeight = $originalHeight * 2;
+            $srcset[2048] = "{$this->getImageSrc($category, $largeWidth, $largeHeight)} {$largeWidth}w";
+        }
+
+        ksort($srcset);
+
+        return array_values([
+            'srcset' => implode(', ', $srcset),
+            'sizes' => $this->getSizes() ?: implode(', ', $sizes)
+        ]);
+    }
+
+    /**
+     * @param int $width
+     * @param float $imageRatio
+     * @return array[width, height]
+     */
+    private function getDimensionsForScreenWidth($screenWidth, $originalWidth, $originalHeight)
+    {
+        $width = 0;
+        $sizes = $this->getSizes();
+
+        if (!$sizes && $screenWidth >= 1024) {
+            return [
+                $originalWidth,
+                $originalHeight,
+            ];
+        }
+
+        if ($sizes) {
+            // Parse sizes and calculate image size according to the rules:
+            // Sizes example: "(min-width: 768px) 25vw, 50vw"
+            $sizes = explode(',', $sizes);
+            foreach ($sizes as $rule) {
+                preg_match('/\(min-width:\s+(\d+)px\)\s+(\d+)(px|vw|%)/', $rule, $matches);
+
+                if (count($matches) === 4) {
+                    list($rule, $ruleScreenWidth, $ruleImageWidth, $ruleImageWidthUnit) = $matches;
+                    if ($screenWidth < $ruleScreenWidth) {
+                        continue;
+                    }
+                } else {
+                    preg_match('/(\d+)(px|vw|%)/', $rule, $matches);
+                    if (count($matches) !== 3) {
+                        continue;
+                    }
+                    list($rule, $ruleImageWidth, $ruleImageWidthUnit) = $matches;
+                }
+
+                switch ($ruleImageWidthUnit) {
+                    case '%':
+                    case 'vw':
+                        $width = $screenWidth * $ruleImageWidth / 100;
+                        break;
+                    case 'px':
+                        $width = $ruleImageWidth;
+                        break;
+                    default:
+                        continue 2;
+                }
+
+                break;
+            }
+        } else {
+            $columnsCount = $this->getColumnCount() ?? 2;
+
+            if ($screenWidth < 768) {
+                $columnsCount = 2;
+            } elseif ($screenWidth < 1024) {
+                $columnsCount = $columnsCount > 4 ? 4 : $columnsCount;
+            }
+
+            $padding = 20 * $columnsCount + 20;
+            $width = ($screenWidth - $padding) / $columnsCount;
+        }
+
+        return [ceil($width), ceil($width * $originalHeight / $originalWidth)];
     }
 
     /**

@@ -44,7 +44,7 @@
                 } else if (!empty($height)) {
                     $style = 'height: ' . (is_numeric($height) ? $height . 'px' : $height);
                 }
-                $srcset = $block->getImageSrcset($_category, $width, $height);
+                list($srcset, $sizes) = $block->getResponsiveAttributes($_category, $width, $height);
             ?>
             <a href="<?= $block->getCategoryUrl($_category) ?>"
                 title="<?= $block->escapeHtml($_category->getName()) ?>"
@@ -52,6 +52,7 @@
             ><img alt="<?= $block->escapeHtml($_category->getName()) ?>"
                 src="<?= $block->getImageSrc($_category, $width, $height) ?>"
                 <?= $srcset ? 'srcset="' . $srcset . '"' : '' ?>
+                <?= $sizes  ? 'sizes="' . $sizes . '"' : '' ?>
                 <?= $width  ? 'width="' . $width . '"' : '' ?>
                 <?= $height ? 'height="' . $height . '"' : '' ?>
                 <?= $style  ? 'style="' . $style . '"' : '' ?>
