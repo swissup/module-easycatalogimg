@@ -15,8 +15,8 @@
 <div class="easycatalogimg" data-content-type="Easycatalogimg_SubcategoriesList">
 <ul class="easycatalogimg-listing easycatalogimg-<?= $block->getMode() ?> easycatalogimg-cols-<?= $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
-        <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
-        <li class="item">
+    <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
+    <li class="item">
         <?php if ($block->getParentCategoryPosition() === 'top') : ?>
             <?php if ($linkAsButton): ?>
                 <div class="category-name parent-category">
