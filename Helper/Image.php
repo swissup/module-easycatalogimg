@@ -99,7 +99,11 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
             $image = $this->imageFactory->create($imageFile);
             $image->constrainOnly(true);
             $image->keepAspectRatio(true);
-            $image->keepFrame(true);
+
+            if ($height) {
+                $image->keepFrame(true);
+            }
+
             $image->keepTransparency(true);
             $image->backgroundColor($this->getBackgroundColor());
             $image->resize($width, $height);

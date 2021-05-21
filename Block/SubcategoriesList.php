@@ -323,7 +323,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      */
     public function getResponsiveAttributes($category, $originalWidth, $originalHeight)
     {
-        if (!$originalWidth || !$originalHeight || !$this->getResizeImage()) {
+        if (!$originalWidth || !$this->getResizeImage()) {
             return ['', ''];
         }
 
