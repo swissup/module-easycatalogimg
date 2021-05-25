@@ -11,9 +11,10 @@
     $maxCategoryCount = $block->getCategoryCount();
     $maxSubcategoryCount = $block->getSubcategoryCount();
     $i = 0;
+    $mode = $block->getMode();
 ?>
 <div class="easycatalogimg" data-content-type="Easycatalogimg_SubcategoriesList">
-<ul class="easycatalogimg-listing easycatalogimg-<?= $block->getMode() ?> easycatalogimg-cols-<?= $columnsCount ?>">
+<ul class="easycatalogimg-listing easycatalogimg-<?= $mode ?> easycatalogimg-cols-<?= $columnsCount ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
     <li class="item">
