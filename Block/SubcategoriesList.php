@@ -82,6 +82,11 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
                  $this->setData($key, $value);
             }
         }
+        //fix for widget
+        if (!$this->hasData('use_image_attribute')) {
+            $this->setData('use_image_attribute', $this->configHelper->useImageAttribute());
+        }
+
         return parent::_construct();
     }
 
@@ -304,16 +309,35 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
 
         $imagePath = $folder . $image;
+        $imagePath = $this->fixImagePath($imagePath);
 
         if (!$image || !file_exists($imagePath)) {
             return $this->configHelper->getPlaceholderSvg(true);
         }
 
         if (!$this->getResizeImage() || $this->isSvg($imagePath)) {
-            return $baseUrl . $image;
+            $image = $baseUrl . $image;
+            return $this->fixImagePath($image);
         }
 
         return $this->getImageHelper()->resize($imagePath, $width, $height);
+    }
+
+    /**
+     * Fix category image path in Magento 2.4
+     *
+     * @param  string $path
+     * @return string
+     */
+    protected function fixImagePath($path)
+    {
+        $path = str_replace(
+            ['/media/catalog/category//media/catalog/category/'],
+            ['/media/catalog/category/'],
+            $path
+        );
+
+        return $path;
     }
 
     /**
