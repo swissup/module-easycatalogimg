@@ -383,8 +383,8 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
 
         // desktop with HiDPI screen
-        if ($srcset) {
-            $largeWidth = $originalWidth * 2;
+        $largeWidth = $originalWidth * 2;
+        if ($srcset && empty($srcset[$largeWidth])) {
             $largeHeight = $originalHeight * 2;
             $srcset[2048] = "{$this->getImageSrc($category, $largeWidth, $largeHeight)} {$largeWidth}w";
         }
