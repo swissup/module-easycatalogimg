@@ -67,8 +67,6 @@ define([
      *
      * @returns {OptionsInterface}
      */
-
-
     var _proto = Preview.prototype;
 
     _proto.retrieveOptions = function retrieveOptions() {
@@ -88,7 +86,6 @@ define([
      * Runs the widget initializer for each configured widget
      */
     ;
-
     _proto.initializeWidgets = function initializeWidgets(element) {
       if (element) {
         this.element = element;
@@ -104,20 +101,18 @@ define([
      * @param {DataObject} data
      */
     ;
-
     _proto.processData = function processData(data) {
       // Only load if something changed
       this.displayPreviewPlaceholder(data, "html");
 
-      if (data.category_id && data.template.length !== 0) {
-        this.processRequest(data, "category_id", "title");
+      if (data.template.length !== 0) {
+        this.processRequest(data,  "title");
       }
     }
     /**
      * @inheritdoc
      */
     ;
-
     _proto.afterObservablesUpdated = function afterObservablesUpdated() {
       _preview2.prototype.afterObservablesUpdated.call(this);
 
@@ -132,7 +127,6 @@ define([
      * @param {string} identifierName
      */
     ;
-
     _proto.displayPreviewPlaceholder = function displayPreviewPlaceholder(data, identifierName) {
       var identifier = (0, _object.get)(data, identifierName); // Only load if something changed
 
@@ -157,29 +151,25 @@ define([
     /**
      *
      * @param {DataObject} data
-     * @param {string} identifierName
      * @param {string} labelKey
      */
     ;
-
-    _proto.processRequest = function processRequest(data, identifierName, labelKey) {
+    _proto.processRequest = function processRequest(data, labelKey) {
       var _this2 = this;
 
       var url = _config.getConfig("preview_url");
 
-      var identifier = (0, _object.get)(data, identifierName);
       var requestConfig = {
         // Prevent caching
         method: "POST",
         data: {
           role: this.config.name,
-          identifier: identifier,
           directive: this.data.main.html()
         }
       };
-      this.loading(true); // Retrieve a state object representing the slider from the preview controller and process it on the stage
+      this.loading(true); // Retrieve a state object representing the widget from the preview controller and process it on the stage
 
-      _jquery.ajax(url, requestConfig) // The state object will contain the slider name and either html or a message why there isn't any.
+      _jquery.ajax(url, requestConfig) // The state object will contain the widget name and either html or a message why there isn't any.
       .done(function (response) {
         // Empty content means something bad happened in the controller that didn't trigger a 5xx
         if (typeof response.data !== "object") {
@@ -188,7 +178,7 @@ define([
           _this2.placeholderText(_this2.messages.UNKNOWN_ERROR);
 
           return;
-        } // Update the stage content type label with the real slider title if provided
+        } // Update the stage content type label with the real widget title if provided
 
 
         _this2.displayLabel(response.data[labelKey] ? response.data[labelKey] : _this2.config.label);
@@ -221,11 +211,10 @@ define([
       });
     }
     /**
-     * Toggle display of slider preview.  If showing slider preview, add hidden mode to PB preview.
+     * Toggle display of widget preview.  If showing widget preview, add hidden mode to PB preview.
      * @param {boolean} isShow
      */
     ;
-
     _proto.showWidgetPreview = function showWidgetPreview(isShow) {
       this.displayingWidgetPreview(isShow);
     }
@@ -235,7 +224,6 @@ define([
      * @param content
      */
     ;
-
     _proto.processContent = function processContent(content) {
       var processedContent = this.processBackgroundImages(content);
       processedContent = this.processBreakpointStyles(processedContent);
@@ -248,7 +236,6 @@ define([
      * @return string
      */
     ;
-
     _proto.processBackgroundImages = function processBackgroundImages(content) {
       var document = new DOMParser().parseFromString(content, "text/html");
       var elements = document.querySelectorAll("[data-background-images]");
