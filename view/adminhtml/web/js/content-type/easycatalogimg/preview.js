@@ -106,7 +106,7 @@ define([
       this.displayPreviewPlaceholder(data, "html");
 
       if (data.template.length !== 0) {
-        this.processRequest(data,  "title");
+        this.processRequest(data, "html", "title");
       }
     }
     /**
@@ -151,19 +151,22 @@ define([
     /**
      *
      * @param {DataObject} data
+     * @param {string} identifierName
      * @param {string} labelKey
      */
     ;
-    _proto.processRequest = function processRequest(data, labelKey) {
+    _proto.processRequest = function processRequest(data, identifierName, labelKey) {
       var _this2 = this;
 
       var url = _config.getConfig("preview_url");
 
+      var identifier = (0, _object.get)(data, identifierName);
       var requestConfig = {
         // Prevent caching
         method: "POST",
         data: {
           role: this.config.name,
+          identifier: identifier,
           directive: this.data.main.html()
         }
       };
