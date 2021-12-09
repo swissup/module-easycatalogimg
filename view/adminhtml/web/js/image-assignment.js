@@ -31,7 +31,9 @@ define(['jquery', 'Magento_Ui/js/modal/alert'], function($, alert) {
                     thumbnail: $('#easycatalogimg_automated_image_assignment_thumbnail').prop('checked') ? 1 : 0,
                     search_in_child_categories: $(
                         '#easycatalogimg_automated_image_assignment_search_in_child_categories'
-                    ).prop('checked') ? 1 : 0
+                    ).prop('checked') ? 1 : 0,
+                    store_id: $('#store_switcher').val(),
+                    website_id: $('#website_switcher').val()
                 }
             })
             .done(function(data) {

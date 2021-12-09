@@ -95,6 +95,7 @@ class AssignImage extends \Magento\Backend\App\Action
 
         $storeGroups = $this->storeManager->getGroups(true);
         $searchInChildCategoriesFlag = $this->getRequest()->getParam('search_in_child_categories');
+        $storeId = $this->getRequest()->getParam('store_id');
         foreach ($categories as $category) {
             $storeGroup = false;
             if ($searchInChildCategoriesFlag) {
@@ -112,10 +113,13 @@ class AssignImage extends \Magento\Backend\App\Action
             }
             if ($storeGroup) {
                 $products = $this->productFactory->create()
-            ->getCollection()
-                    ->setStoreId($storeGroup->getDefaultStoreId())
+                    ->getCollection()
+                    ->setStoreId($storeId ?: $storeGroup->getDefaultStoreId())
                     ->addCategoryFilter($category);
             } else {
+                if ($storeId) {
+                    $category->setStoreId($storeId);
+                }
                 $products = $category->getProductCollection();
             }
             $products->addAttributeToSelect('image')
@@ -140,7 +144,7 @@ class AssignImage extends \Magento\Backend\App\Action
             }
             if (file_exists($destination)) {
                 $category
-                    ->setStoreId(\Magento\Store\Model\Store::DEFAULT_STORE_ID)
+                    ->setStoreId($storeId ?: \Magento\Store\Model\Store::DEFAULT_STORE_ID)
                     ->setThumbnail($image)
                     ->save();
             }
