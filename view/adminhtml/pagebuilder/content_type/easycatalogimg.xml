@@ -8,7 +8,7 @@
           form="pagebuilder_easycatalogimg_form"
           menu_section="add_content"
           icon="icon-pagebuilder-slider"
-          sortOrder="73"
+          sortOrder="75"
           translate="label">
         <parents default_policy="deny">
             <parent name="root-container" policy="allow"/>
