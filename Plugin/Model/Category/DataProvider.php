@@ -43,11 +43,11 @@ class DataProvider
     }
 
     /**
-     * Prepare thumbnail data for uploader component
+     * Fix possible broken image
      *
-     * @param  \Magento\Catalog\Model\Category\DataProvider $subject [description]
-     * @param  [type]                                       $result  [description]
-     * @return [type]                                                [description]
+     * @param  \Magento\Catalog\Model\Category\DataProvider $subject
+     * @param  array $result
+     * @return array
      */
     public function afterGetData(
         \Magento\Catalog\Model\Category\DataProvider $subject,
@@ -57,13 +57,13 @@ class DataProvider
         if ($category) {
             $id = $category->getId();
 
-            // unset image data if there are no name and url
-            if (isset($result[$id]['image'])) {
-                if (!isset($result[$id]['image'][0]['name'])
-                    || empty($result[$id]['image'][0]['name'])
-                ) {
-                    unset($result[$id]['image']);
+            // unset image data if there are no name and url (if an error accures during category save)
+            foreach (['thumbnail', 'image'] as $attr) {
+                if (!isset($result[$id][$attr]) || !empty($result[$id][$attr][0]['name'])) {
+                    continue;
                 }
+
+                unset($result[$id][$attr]);
             }
         }
 
