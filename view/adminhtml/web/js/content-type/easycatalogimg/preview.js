@@ -106,7 +106,7 @@ define([
       this.displayPreviewPlaceholder(data, "html");
 
       if (data.template.length !== 0) {
-        this.processRequest(data, "html", "title");
+        this.processRequest(data, "category_id", "title");
       }
     }
     /**
@@ -130,7 +130,7 @@ define([
     _proto.displayPreviewPlaceholder = function displayPreviewPlaceholder(data, identifierName) {
       var identifier = (0, _object.get)(data, identifierName); // Only load if something changed
 
-      if (this.lastIdentifier === identifier && this.lastTemplate === data.template) {
+      if (this.lastIdentifier && this.lastIdentifier === identifier && this.lastTemplate === data.template) {
         // The mass converter will have transformed the HTML property into a directive
         if (this.lastRenderedHtml) {
           this.data.main.html(this.lastRenderedHtml);
@@ -202,7 +202,7 @@ define([
           _this2.placeholderText(response.data.error);
         }
 
-        _this2.lastIdentifier = parseInt(identifier.toString(), 10);
+        _this2.lastIdentifier = identifier ? identifier : false;
         _this2.lastTemplate = data.template.toString();
         _this2.lastRenderedHtml = content;
       }).fail(function () {
