@@ -13,7 +13,7 @@
 
             @media (min-width: 768px) {
                 .generate-columns(4);
-                .generate-columns(@n, @i: 2) when (@i =< @n) {
+                .generate-columns(@n, @i: 3) when (@i =< @n) {
                     &.easycatalogimg-cols-@{i} {
                         .item {
                             width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
@@ -31,7 +31,7 @@
 
             @media (min-width: 1024px) {
                 .generate-columns(6);
-                .generate-columns(@n, @i: 2) when (@i =< @n) {
+                .generate-columns(@n, @i: 5) when (@i =< @n) {
                     &.easycatalogimg-cols-@{i} .item {
                         width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
                     }
