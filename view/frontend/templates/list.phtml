@@ -14,7 +14,7 @@
     $mode = $block->getMode();
 ?>
 <div class="easycatalogimg" data-content-type="easycatalogimg">
-<ul class="easycatalogimg-listing easycatalogimg-<?= $mode ?> easycatalogimg-cols-<?= $columnsCount ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
+<ul class="unstyled easycatalogimg-listing easycatalogimg-<?= $mode ?> easycatalogimg-cols-<?= $columnsCount ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
     <li class="item">
