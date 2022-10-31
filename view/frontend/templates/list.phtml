@@ -17,9 +17,9 @@
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
     <li class="item">
-        <div class="parent-category">
+        <div class="parent-category-wrapper">
             <?php if ($block->getParentCategoryPosition() === 'over') : ?>
-                <div class="category-name over-image">
+                <div class="category-name parent-category parent-category-over">
                     <h2 class="name"><?= $block->escapeHtml($_category->getName()) ?></h2>
                     <div class="category-link">
                         <a class="action primary" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
@@ -28,9 +28,11 @@
                     </div>
                 </div>
             <?php elseif ($block->getParentCategoryPosition() === 'top'): ?>
-                <a class="category-name above-image" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
-                    <?= $block->escapeHtml($_category->getName()) ?>
-                </a>
+                <div class="category-name parent-category parent-category-top">
+                    <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
+                        <?= $block->escapeHtml($_category->getName()) ?>
+                    </a>
+                </div>
             <?php endif ?>
 
             <?php if ($block->getShowImage()) : ?>
@@ -57,9 +59,11 @@
             <?php endif; ?>
 
             <?php if ($block->getParentCategoryPosition() === 'bottom') : ?>
-                <a class="category-name below-image" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
-                    <?= $block->escapeHtml($_category->getName()) ?>
-                </a>
+                <div class="category-name parent-category parent-category-bottom">
+                    <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
+                        <?= $block->escapeHtml($_category->getName()) ?>
+                    </a>
+                </div>
             <?php endif ?>
         </div>
 
