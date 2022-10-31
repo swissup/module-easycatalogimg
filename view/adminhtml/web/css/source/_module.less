@@ -29,23 +29,36 @@
             margin: 0;
         }
 
-        .image + .parent-category,
+        .image + .category-name,
         .list-subcategories {
             margin: 10px;
         }
 
         .parent-category {
-            font-weight: bold;
-
-            &-top {
+            position: relative;
+            .category-name {
+                display: block;
+                font-weight: bold;
+            }
+            .category-name.over-image {
+                position: absolute;
+                bottom: ~"clamp(10px, 2vw, 40px)";
+                left: ~"clamp(10px, 2vw, 40px)";
+                z-index: 10;
+                .name {
+                    color: #fff;
+                    text-shadow: ~"0 2px 10px rgb(0 0 0 / 50%)";
+                }
+                .primary {
+                    &:extend(.pagebuilder-button-primary all);
+                }
+            }
+            .category-name.above-image {
                 margin: 10px;
+                display: block;
                 text-align: center;
                 font-weight: normal;
-                font-size: 17px;
-            }
-
-            + .list-subcategories {
-                margin-top: -5px;
+                font-size: 1.2em;
             }
         }
 

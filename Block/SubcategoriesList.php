@@ -534,10 +534,28 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      */
     public function getParentCategoryPosition()
     {
+        if ($this->getLinkAsButton()) {
+            return 'over';
+        }
+
         if ($this->hasData('parent_category_position')) {
             return $this->getData('parent_category_position');
         }
+
         return 'top';
+    }
+
+    public function getCssClassName(): string
+    {
+        $classes = [
+            'unstyled',
+            'easycatalogimg-listing',
+            'easycatalogimg-' . $this->getMode(),
+            'easycatalogimg-cols-' . $this->getColumnCount(),
+            'category-name-' . $this->getParentCategoryPosition(),
+        ];
+
+        return implode(' ', $classes);
     }
 
     /**

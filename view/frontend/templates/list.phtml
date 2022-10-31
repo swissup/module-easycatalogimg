@@ -5,7 +5,6 @@
     }
     /* @var $block \Swissup\Easycatalogimg\Block\SubcategoriesList */
     $columnsCount = $block->getColumnCount();
-    $linkAsButton = $block->getLinkAsButton();
     $height = $block->getImageHeight();
     $width = $block->getImageWidth();
     $maxCategoryCount = $block->getCategoryCount();
@@ -14,13 +13,13 @@
     $mode = $block->getMode();
 ?>
 <div class="easycatalogimg" data-content-type="easycatalogimg">
-<ul class="unstyled easycatalogimg-listing easycatalogimg-<?= $mode ?> easycatalogimg-cols-<?= $columnsCount ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
+<ul class="<?= $block->getCssClassName() ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
     <li class="item">
-        <?php if ($block->getParentCategoryPosition() === 'top') : ?>
-            <?php if ($linkAsButton): ?>
-                <div class="category-name parent-category">
+        <div class="parent-category">
+            <?php if ($block->getParentCategoryPosition() === 'over') : ?>
+                <div class="category-name over-image">
                     <h2 class="name"><?= $block->escapeHtml($_category->getName()) ?></h2>
                     <div class="category-link">
                         <a class="action primary" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
@@ -28,45 +27,41 @@
                         </a>
                     </div>
                 </div>
-            <?php else: ?>
-                <div class="category-name parent-category parent-category-top">
-                    <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
-                        <?= $block->escapeHtml($_category->getName()) ?>
-                    </a>
-                </div>
-            <?php endif ?>
-        <?php endif ?>
-
-        <?php if ($block->getShowImage()) : ?>
-            <?php
-                $style = '';
-                if (!empty($width)) {
-                    $style = 'width: ' . (is_numeric($width) ? $width . 'px' : $width);
-                } else if (!empty($height)) {
-                    $style = 'height: ' . (is_numeric($height) ? $height . 'px' : $height);
-                }
-                list($srcset, $sizes) = $block->getResponsiveAttributes($_category, $width, $height);
-            ?>
-            <a href="<?= $block->getCategoryUrl($_category) ?>"
-                title="<?= $block->escapeHtml($_category->getName()) ?>"
-                class="image"
-            ><img alt="<?= $block->escapeHtml($_category->getName()) ?>"
-                src="<?= $block->getImageSrc($_category, $width, $height) ?>"
-                <?= $srcset ? 'srcset="' . $srcset . '"' : '' ?>
-                <?= $sizes  ? 'sizes="' . $sizes . '"' : '' ?>
-                <?= $width  ? 'width="' . $width . '"' : '' ?>
-                <?= $height ? 'height="' . $height . '"' : '' ?>
-                <?= $style  ? 'style="' . $style . '"' : '' ?>
-            /></a>
-        <?php endif; ?>
-
-        <?php if ($block->getParentCategoryPosition() !== 'top') : ?>
-            <div class="category-name parent-category">
-                <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
+            <?php elseif ($block->getParentCategoryPosition() === 'top'): ?>
+                <a class="category-name above-image" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
                     <?= $block->escapeHtml($_category->getName()) ?>
                 </a>
-            </div>
-        <?php endif ?>
+            <?php endif ?>
+
+            <?php if ($block->getShowImage()) : ?>
+                <?php
+                    $style = '';
+                    if (!empty($width)) {
+                        $style = 'width: ' . (is_numeric($width) ? $width . 'px' : $width);
+                    } else if (!empty($height)) {
+                        $style = 'height: ' . (is_numeric($height) ? $height . 'px' : $height);
+                    }
+                    list($srcset, $sizes) = $block->getResponsiveAttributes($_category, $width, $height);
+                ?>
+                <a href="<?= $block->getCategoryUrl($_category) ?>"
+                    title="<?= $block->escapeHtml($_category->getName()) ?>"
+                    class="image"
+                ><img alt="<?= $block->escapeHtml($_category->getName()) ?>"
+                    src="<?= $block->getImageSrc($_category, $width, $height) ?>"
+                    <?= $srcset ? 'srcset="' . $srcset . '"' : '' ?>
+                    <?= $sizes  ? 'sizes="' . $sizes . '"' : '' ?>
+                    <?= $width  ? 'width="' . $width . '"' : '' ?>
+                    <?= $height ? 'height="' . $height . '"' : '' ?>
+                    <?= $style  ? 'style="' . $style . '"' : '' ?>
+                /></a>
+            <?php endif; ?>
+
+            <?php if ($block->getParentCategoryPosition() === 'bottom') : ?>
+                <a class="category-name below-image" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
+                    <?= $block->escapeHtml($_category->getName()) ?>
+                </a>
+            <?php endif ?>
+        </div>
 
         <?php
         $_subcategories = $_category->getSubcategories();

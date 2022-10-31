@@ -149,11 +149,6 @@
             </settings>
         </field>
         <field name="show_image" sortOrder="70" formElement="select">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="default" xsi:type="string">false</item>
-                </item>
-            </argument>
             <settings>
                 <dataType>text</dataType>
                 <label translate="true">Show images</label>
@@ -162,11 +157,11 @@
                 <select>
                     <settings>
                         <options>
-                            <option name="1" xsi:type="array">
+                            <option name="0" xsi:type="array">
                                 <item name="value" xsi:type="string">1</item>
                                 <item name="label" xsi:type="string" translate="true">Yes</item>
                             </option>
-                            <option name="0" xsi:type="array">
+                            <option name="1" xsi:type="array">
                                 <item name="value" xsi:type="string">0</item>
                                 <item name="label" xsi:type="string" translate="true">No</item>
                             </option>
@@ -207,7 +202,33 @@
                 <label translate="false">Image height</label>
             </settings>
         </field>
-        <field name="sizes" sortOrder="91" formElement="input">
+        <field name="parent_category_position" sortOrder="100" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Parent category name position</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">top</item>
+                                <item name="label" xsi:type="string" translate="true">Above image</item>
+                            </option>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">bottom</item>
+                                <item name="label" xsi:type="string" translate="true">Below image</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">over</item>
+                                <item name="label" xsi:type="string" translate="true">Over image</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="sizes" sortOrder="130" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">page</item>
@@ -220,7 +241,7 @@
                 <notice>Leave empty to use default sizes. Example: (min-width: 768px) 25vw, 50vw</notice>
             </settings>
         </field>
-        <field name="category_to_show" sortOrder="92" formElement="input">
+        <field name="category_to_show" sortOrder="140" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">page</item>
@@ -233,7 +254,7 @@
                 <notice>Comma separated ids. Example: 13,17</notice>
             </settings>
         </field>
-        <field name="category_to_hide" sortOrder="93" formElement="input">
+        <field name="category_to_hide" sortOrder="150" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">page</item>
@@ -246,7 +267,7 @@
                 <notice>Comma separated ids. Example: 13,17</notice>
             </settings>
         </field>
-        <field name="hide_when_filter_is_used" sortOrder="120" formElement="select">
+        <field name="hide_when_filter_is_used" sortOrder="160" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="default" xsi:type="string">0</item>
@@ -274,7 +295,7 @@
                 </select>
             </formElements>
         </field>
-        <field name="template" formElement="select" sortOrder="30" component="Magento_PageBuilder/js/form/element/dependent-select">
+        <field name="template" formElement="select" sortOrder="170" component="Magento_PageBuilder/js/form/element/dependent-select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="default" xsi:type="string">default</item>

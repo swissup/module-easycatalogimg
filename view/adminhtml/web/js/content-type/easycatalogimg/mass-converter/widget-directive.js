@@ -53,6 +53,7 @@ define([
       data.show_image = attributes.show_image;
       data.image_width = attributes.image_width;
       data.image_height = attributes.image_height;
+      data.parent_category_position = attributes.parent_category_position;
       data.sizes = attributes.sizes;
       data.category_to_show = attributes.category_to_show;
       data.category_to_hide = attributes.category_to_hide;
@@ -80,6 +81,7 @@ define([
           show_image: data.show_image,
           image_width: data.image_width,
           image_height: data.image_height,
+          parent_category_position: data.parent_category_position,
           sizes: data.sizes,
           category_to_show: data.category_to_show,
           category_to_hide: data.category_to_hide,
