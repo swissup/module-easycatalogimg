@@ -5,10 +5,18 @@
         flex-wrap: wrap;
         margin: 0;
 
+        --item-padding: @easycatalogimg-grid-item__padding;
+        --item-margin: @easycatalogimg-grid-item__margin;
+
+        [data-content-type="easycatalogimg"].gap-0 & {
+            --item-padding: 0;
+            --item-margin: 0;
+        }
+
         .item {
-            width: ~"calc(50% - @{easycatalogimg-grid-item__margin}*2)";
-            margin: @easycatalogimg-grid-item__margin;
-            padding: @easycatalogimg-grid-item__padding;
+            width: ~"calc(50% - var(--item-margin) * 2px)";
+            margin: var(--item-margin);
+            padding: var(--item-padding);
         }
 
         @media (min-width: 768px) {
@@ -16,7 +24,7 @@
             .generate-columns(@n, @i: 3) when (@i =< @n) {
                 &.easycatalogimg-cols-@{i} {
                     .item {
-                        width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
+                        width: ~"calc(100% / @{i} - var(--item-margin) * 2px)";
                     }
                 }
                 .generate-columns(@n, (@i + 1));
@@ -24,7 +32,7 @@
             &.easycatalogimg-cols-5,
             &.easycatalogimg-cols-6 {
                 .item {
-                    width: ~"calc(100% / 4 - @{easycatalogimg-grid-item__margin}*2)";
+                    width: ~"calc(100% / 4 - var(--item-margin) * 2px)";
                 }
             }
         }
@@ -33,7 +41,7 @@
             .generate-columns(6);
             .generate-columns(@n, @i: 5) when (@i =< @n) {
                 &.easycatalogimg-cols-@{i} .item {
-                    width: ~"calc(100% / @{i} - @{easycatalogimg-grid-item__margin}*2)";
+                    width: ~"calc(100% / @{i} - var(--item-margin) * 2px)";
                 }
                 .generate-columns(@n, (@i + 1));
             }
