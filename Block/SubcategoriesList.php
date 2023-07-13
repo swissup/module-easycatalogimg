@@ -87,7 +87,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
             $this->setData('use_image_attribute', $this->configHelper->useImageAttribute());
         }
 
-        return parent::_construct();
+        parent::_construct();
     }
 
     /**

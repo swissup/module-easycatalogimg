@@ -152,7 +152,8 @@ class AssignImage extends \Magento\Backend\App\Action
 
         $processed = $this->getRequest()->getParam('processed', 0) + count($categories);
         $finished  = (int)(count($categories) < $pageSize);
-        $this->getResponse()->setBody(
+
+        return $this->getResponse()->setBody(
             $this->jsonEncoder->encode(array(
                 'finished'  => $finished,
                 'processed' => $processed,

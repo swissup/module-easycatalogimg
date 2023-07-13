@@ -44,6 +44,8 @@ class CreateThumbnailAttribute implements DataPatchInterface, PatchVersionInterf
                 'global' => ScopedAttributeInterface::SCOPE_STORE,
                 'group' => 'General Information',
             ]);
+
+        return $this;
     }
 
     public static function getVersion()
