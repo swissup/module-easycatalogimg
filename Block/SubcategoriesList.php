@@ -2,9 +2,10 @@
 namespace Swissup\Easycatalogimg\Block;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
-use \Magento\Framework\UrlInterface;
-use \Magento\Framework\App\Filesystem\DirectoryList;
-use \Swissup\Easycatalogimg\Model\Config\Backend\Image\Placeholder;
+use Magento\Catalog\Model\Category;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Swissup\Easycatalogimg\Model\Config\Backend\Image\Placeholder;
 
 class SubcategoriesList extends \Magento\Framework\View\Element\Template implements
     \Magento\Framework\DataObject\IdentityInterface,
@@ -43,6 +44,8 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
      * @var \Magento\Framework\File\Mime
      */
     private $mime;
+
+    private $identities = [];
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -88,16 +91,6 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
 
         parent::_construct();
-    }
-
-    /**
-     * Return identifiers for produced content
-     *
-     * @return array
-     */
-    public function getIdentities()
-    {
-        return ['easycatalogimg_subcategories_list'];
     }
 
     /**
@@ -180,6 +173,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
             $category->setStoreId($storeId);
             if ($category->getLevel() == ($currentLevel + 1)) {
                 $result[$category->getId()] = $category;
+                $this->identities[] = Category::CACHE_TAG . '_' . $category->getId();
             } else {
                 $subcategories[$category->getParentId()][] = $category;
             }
@@ -192,6 +186,10 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
 
             $parent = $result[$parentId];
             $parent->setSubcategories($_subcategories);
+
+            foreach ($_subcategories as $category) {
+                $this->identities[] = Category::CACHE_TAG . '_' . $category->getId();
+            }
         }
 
         return $result;
@@ -595,5 +593,53 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         }
 
         return $url;
+    }
+
+    public function getIdentities()
+    {
+        return array_merge(
+            [
+                Category::CACHE_TAG,
+            ],
+            $this->identities
+        );
+    }
+
+    protected function getCacheLifetime()
+    {
+        if ($this->getData('cache_lifetime') === false) {
+            return null;
+        }
+
+        return parent::getCacheLifetime() ?: 3600;
+    }
+
+    public function getCacheKeyInfo()
+    {
+        $keyInfo = array_merge(parent::getCacheKeyInfo(), [
+           $this->getShowImage(),
+           $this->getResizeImage(),
+           $this->getCategoryCount(),
+           $this->getSubcategoryCount(),
+           $this->getColumnCount(),
+           $this->getImageWidth(),
+           $this->getImageHeight(),
+           $this->getCategoryToShow(),
+           $this->getCategoryToHide(),
+           $this->getSizes(),
+           $this->getParentCategoryPosition(),
+           $this->getCssClassName(),
+           $this->getMode(),
+        ]);
+
+        if (!$category = $this->getCurrentCategory()) {
+            $category = $this->categoryRepository->get($this->getCurrentStore()->getRootCategoryId());
+        }
+
+        if ($category) {
+            $keyInfo[] = $category->getId();
+        }
+
+        return $keyInfo;
     }
 }
