@@ -351,7 +351,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
 
         $srcset = [];
         $sizes = [];
-        $screens = [1024, 960, 768, 640, 480, 360];
+        $screens = [1024, 768, 480];
         foreach ($screens as $screenWidth) {
             list($width, $height) = $this->getDimensionsForScreenWidth(
                 $screenWidth,
