@@ -321,6 +321,17 @@
                 </select>
             </formElements>
         </field>
-
+        <field name="cache_lifetime" sortOrder="180" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>cache_lifetime</dataScope>
+                <dataType>text</dataType>
+                <label translate="false">Cache Lifetime (Seconds)</label>
+            </settings>
+        </field>
     </fieldset>
 </form>

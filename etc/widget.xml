@@ -93,6 +93,9 @@
                 <label translate="true">Custom Template</label>
                 <description translate="true">Used, when template value is set to 'Custom'</description>
             </parameter>
+            <parameter name="cache_lifetime" xsi:type="text" visible="true" sort_order="107">
+                <label translate="true">Cache Lifetime (Seconds)</label>
+            </parameter>
             <parameter name="hide_when_filter_is_used" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="110">
                 <label translate="true">Hidden, when filter or pagination is used</label>
             </parameter>

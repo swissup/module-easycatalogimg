@@ -607,11 +607,7 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
 
     protected function getCacheLifetime()
     {
-        if ($this->getData('cache_lifetime') === false) {
-            return null;
-        }
-
-        return parent::getCacheLifetime() ?: 3600;
+        return $this->getData('cache_lifetime') ?: null;
     }
 
     public function getCacheKeyInfo()
