@@ -170,6 +170,28 @@
                 </select>
             </formElements>
         </field>
+        <field name="image_lazyload" sortOrder="71" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Use lazyload</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string" translate="true">Yes</item>
+                            </option>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">0</item>
+                                <item name="label" xsi:type="string" translate="true">No</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
         <field name="image_width" sortOrder="80" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

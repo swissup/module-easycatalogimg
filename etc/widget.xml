@@ -32,6 +32,12 @@
             <parameter name="show_image" xsi:type="select" visible="true" required="false" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="50">
                 <label translate="true">Show images</label>
             </parameter>
+            <parameter name="image_lazyload" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="60">
+                <label translate="true">Use lazyload</label>
+                <depends>
+                    <parameter name="show_image" value="1" />
+                </depends>
+            </parameter>
             <parameter name="image_width" xsi:type="text" required="false" visible="true" sort_order="60">
                 <label translate="true">Image width</label>
                 <depends>

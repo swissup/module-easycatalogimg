@@ -51,6 +51,7 @@ define([
       data.subcategory_count = attributes.subcategory_count;
       data.column_count = attributes.column_count;
       data.show_image = attributes.show_image;
+      data.image_lazyload = attributes.image_lazyload;
       data.image_width = attributes.image_width;
       data.image_height = attributes.image_height;
       data.parent_category_position = attributes.parent_category_position;
@@ -80,6 +81,7 @@ define([
           subcategory_count: data.subcategory_count,
           column_count: data.column_count,
           show_image: data.show_image,
+          image_lazyload: data.image_lazyload,
           image_width: data.image_width,
           image_height: data.image_height,
           parent_category_position: data.parent_category_position,

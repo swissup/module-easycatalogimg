@@ -59,6 +59,7 @@
                     <?= $width  ? 'width="' . $width . '"' : '' ?>
                     <?= $height ? 'height="' . $height . '"' : '' ?>
                     <?= $style  ? 'style="' . $style . '"' : '' ?>
+                    <?= $block->getImageLazyload()  ? 'loading="lazy"' : '' ?>
                 /></a>
             <?php endif; ?>
 
