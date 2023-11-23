@@ -17,7 +17,7 @@
         "hide_when_filter_is_used": <?= (int) $this->getHideWhenFilterIsUsed() ?>
     }
 }'>
-<ul class="<?= $block->getCssClassName() ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
+<ul class="unstyled <?= $block->getCssClassName() ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
     <li class="item">
@@ -80,7 +80,7 @@
             // display More link, if more than one subcategory is not shown, otherwise - display last category
             $_displayMoreLink = $_count > $maxSubcategoryCount + 1;
             if ($_count) : ?>
-                <ul class="list-subcategories">
+                <ul class="unstyled list-subcategories">
                 <?php foreach ($_subcategories as $_subcategory) :
                     if ($_displayMoreLink && ($j > $maxSubcategoryCount - 1)): ?>
                         <li>
