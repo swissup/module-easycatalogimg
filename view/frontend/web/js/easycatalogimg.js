@@ -1,5 +1,6 @@
 define([
-    'jquery'
+    'jquery',
+    'Magento_Ui/js/modal/modal' // 2.3.3: create 'jquery-ui-modules/widget' dependency
 ], function ($) {
     'use strict';
 
