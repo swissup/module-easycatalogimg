@@ -87,9 +87,6 @@
                 <listens>
                     <link name="${ $.namespace }.${ $.namespace }:responseData">setParsed</link>
                 </listens>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
             </settings>
             <formElements>
                 <select>
