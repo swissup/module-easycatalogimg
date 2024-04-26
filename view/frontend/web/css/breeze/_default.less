@@ -1,1 +1,24 @@
 @import "../source/_module.less";
+
+.zoom-on-hover {} // @todo: remove after breeze-blank release
+
+& when (@critical) {
+    .easycatalogimg {
+        img {
+            .lib-css(border-radius, @product-image__border-radius);
+        }
+    }
+}
+
+& when not (@critical) {
+    .hover-zoom-container .easycatalogimg {
+        .parent-category-wrapper {
+            overflow: hidden;
+            .lib-css(border-radius, @product-image__border-radius);
+            .zoom-on-hover();
+            img {
+                transition-duration: 1s;
+            }
+        }
+    }
+}
