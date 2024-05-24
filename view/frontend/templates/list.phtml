@@ -12,11 +12,7 @@
     $i = 0;
     $mode = $block->getMode();
 ?>
-<div class="easycatalogimg" data-content-type="easycatalogimg" data-mage-init='{
-    "Swissup_Easycatalogimg/js/easycatalogimg": {
-        "hide_when_filter_is_used": <?= (int) $this->getHideWhenFilterIsUsed() ?>
-    }
-}'>
+<div class="easycatalogimg" data-content-type="easycatalogimg">
 <ul class="unstyled <?= $block->getCssClassName() ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
