@@ -1,6 +1,12 @@
 & when (@media-common = true) {
 & when (@critical = unsure), (@critical) {
     .easycatalogimg {
+        &.hide-when-filter {
+            body:has(.filter-active, .pages-item-previous) & {
+                display: none;
+            }
+        }
+
         &-listing {
             list-style: none;
             padding: 0;
