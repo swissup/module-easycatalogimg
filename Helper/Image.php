@@ -110,7 +110,9 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
             $image->save($cacheDir . '/' . $imageName);
             return $cacheUrl . $imageName;
         } catch (\Exception $e) {
-            return false;
+            $baseDir = $this->getBaseDir();
+            $baseUrl = $this->getBaseUrl();
+            return str_replace($baseDir, $baseUrl, $imageFile);
         }
     }
     /**
