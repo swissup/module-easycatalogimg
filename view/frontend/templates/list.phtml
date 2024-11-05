@@ -11,6 +11,7 @@
     $maxSubcategoryCount = $block->getSubcategoryCount();
     $i = 0;
     $mode = $block->getMode();
+    $isParentNameVisible = in_array($block->getParentCategoryPosition(), ['over', 'top', 'bottom']);
 ?>
 <div class="easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
 <ul class="unstyled <?= $block->getCssClassName() ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
@@ -46,6 +47,7 @@
                     list($srcset, $sizes) = $block->getResponsiveAttributes($_category, $width, $height);
                 ?>
                 <a href="<?= $block->getCategoryUrl($_category) ?>"
+                    <?= $isParentNameVisible ? 'tabindex="-1"' : '' ?>
                     title="<?= $block->escapeHtml($_category->getName()) ?>"
                     class="image"
                 ><img alt="<?= $block->escapeHtml($_category->getName()) ?>"
