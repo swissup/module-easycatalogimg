@@ -58,6 +58,9 @@
 
             &-wrapper {
                 position: relative;
+                &:has(.parent-category-over) {
+                    background: #8d8d8d; // a11y contrast fix
+                }
             }
 
             &-top {
