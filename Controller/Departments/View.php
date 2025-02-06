@@ -41,9 +41,18 @@ class View extends Action
     {
         /** @var \Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->set(
+        $pageConfig = $resultPage->getConfig();
+        $pageConfig->getTitle()->set(
             __($this->configHelper->getDepartmentsTitle())
         );
+
+        $departmentsPath = $this->configHelper->getDepartmentsUrlPath();
+        $pageConfig->addRemotePageAsset(
+            $this->_url->getUrl($departmentsPath),
+            'canonical',
+            ['attributes' => ['rel' => 'canonical']]
+        );
+
         return $resultPage;
     }
 }
