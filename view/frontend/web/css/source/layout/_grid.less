@@ -2,9 +2,11 @@
 & when (@critical = unsure), (@critical) {
     .easycatalogimg-grid {
         display: flex;
+        gap: var(--item-gap);
         flex-wrap: wrap;
         margin: 0;
 
+        --item-gap: 0px;
         --item-padding: @easycatalogimg-grid-item__padding;
         --item-margin: @easycatalogimg-grid-item__margin;
 
@@ -14,7 +16,7 @@
         }
 
         .item {
-            width: ~"calc(50% - var(--item-margin) * 2)";
+            width: ~"calc((100% - var(--item-gap)) / 2 - var(--item-margin) * 2)";
             margin: var(--item-margin);
             padding: var(--item-padding);
         }
@@ -24,7 +26,7 @@
             .generate-columns(@n, @i: 3) when (@i =< @n) {
                 &.easycatalogimg-cols-@{i} {
                     .item {
-                        width: ~"calc(100% / @{i} - var(--item-margin) * 2)";
+                        width: ~"calc((100% - var(--item-gap) * (@{i} - 1)) / @{i} - var(--item-margin) * 2)";
                     }
                 }
                 .generate-columns(@n, (@i + 1));
@@ -32,7 +34,7 @@
             &.easycatalogimg-cols-5,
             &.easycatalogimg-cols-6 {
                 .item {
-                    width: ~"calc(100% / 4 - var(--item-margin) * 2)";
+                    width: ~"calc((100% - var(--item-gap) * 3) / 4 - var(--item-margin) * 2)";
                 }
             }
         }
@@ -41,7 +43,7 @@
             .generate-columns(6);
             .generate-columns(@n, @i: 5) when (@i =< @n) {
                 &.easycatalogimg-cols-@{i} .item {
-                    width: ~"calc(100% / @{i} - var(--item-margin) * 2)";
+                    width: ~"calc((100% - var(--item-gap) * (@{i} - 1)) / @{i} - var(--item-margin) * 2)";
                 }
                 .generate-columns(@n, (@i + 1));
             }
