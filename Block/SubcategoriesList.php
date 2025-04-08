@@ -238,7 +238,11 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
     public function getCurrentCategory()
     {
         if ($categoryId = $this->getCategoryId()) {
-            return $this->categoryRepository->get($categoryId);
+            try {
+                return $this->categoryRepository->get($categoryId);
+            } catch (\Exception $e) {
+                //
+            }
         }
 
         if (!$this->hasData('current_category')) {
