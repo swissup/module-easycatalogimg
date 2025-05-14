@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="breeze.criticalImages">
+            <arguments>
+                <argument name="image_xpaths" xsi:type="array">
+                    <item name="easycatalogimg" xsi:type="string"><![CDATA[//div[contains(@class, "easycatalogimg")]//li[1]//img]]></item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
