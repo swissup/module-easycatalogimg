@@ -5,7 +5,7 @@
         <referenceBlock name="breeze.criticalImages">
             <arguments>
                 <argument name="image_xpaths" xsi:type="array">
-                    <item name="category" xsi:type="string"><![CDATA[//main[div[contains(@class, "easycatalogimg")]]//div[@class="category-image"]//img]]></item>
+                    <item name="category" xsi:type="string"><![CDATA[//main[div[contains(@class, "easycatalogimg")]]//div[@class="category-view"]/div[@class="category-image"]//img]]></item>
                     <item name="easycatalogimg1" xsi:type="string"><![CDATA[//div[@class="category-view"]/following-sibling::div[contains(@class, "easycatalogimg")]//li[@class="item" and position()<=2]//img]]></item>
                     <item name="easycatalogimg2" xsi:type="string"><![CDATA[//div[@class="category-view"]/div[contains(@class, "easycatalogimg")]//li[@class="item" and position()<=2]//img]]></item>
                 </argument>
