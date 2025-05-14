@@ -325,6 +325,17 @@ class SubcategoriesList extends \Magento\Framework\View\Element\Template impleme
         return $this->getImageHelper()->resize($imagePath, $width, $height);
     }
 
+    public function getImageLazyloadOffset()
+    {
+        $offset = $this->getData('image_lazyload_offset');
+
+        if ($offset !== null) {
+            return $offset;
+        }
+
+        return $this->getImageLazyload() ? 0 : 1000;
+    }
+
     /**
      * Fix category image path in Magento 2.4
      *

@@ -7,6 +7,7 @@
                 <arguments>
                     <argument name="import_config_from" xsi:type="string">easycatalogimg/category</argument>
                     <argument name="disabled_for_root" xsi:type="boolean">true</argument>
+                    <argument name="image_lazyload_offset" xsi:type="number">2</argument>
                 </arguments>
             </block>
         </referenceContainer>

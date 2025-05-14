@@ -9,6 +9,7 @@
                 <arguments>
                     <argument name="import_config_from" xsi:type="string">easycatalogimg/departments</argument>
                     <argument name="parent_category_position" xsi:type="string">bottom</argument>
+                    <argument name="image_lazyload_offset" xsi:type="number">1</argument>
                 </arguments>
             </block>
         </referenceContainer>
