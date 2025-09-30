@@ -85,7 +85,7 @@
                     if ($_displayMoreLink && ($j > $maxSubcategoryCount - 1)): ?>
                         <li>
                             <a href="<?= $escaper->escapeUrl($block->getCategoryUrl($_category)) ?>" title="<?= $escaper->escapeHtmlAttr($_category->getName()) ?>" class="link-more">
-                                <?= __('More in %1...', $escaper->escapeHtml($_category->getName())); ?>
+                                <?= $escaper->escapeHtml(__('More in %1...', $_category->getName())) ?>
                             </a>
                         </li>
                         <?php break;
