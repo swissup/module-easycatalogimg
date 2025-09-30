@@ -1,4 +1,6 @@
 <?php
+    /** @var \Magento\Framework\Escaper $escaper */
+
     $_categories = $block->getCategories();
     if (!count($_categories)) {
         return;
@@ -14,24 +16,24 @@
     $isParentNameVisible = in_array($block->getParentCategoryPosition(), ['over', 'top', 'bottom']);
 ?>
 <div class="easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
-<ul class="unstyled <?= $block->getCssClassName() ?>" data-mode="<?= $mode ?>" data-cols="<?= $columnsCount ?>">
+<ul class="unstyled <?= $escaper->escapeHtmlAttr($block->getCssClassName()) ?>" data-mode="<?= $escaper->escapeHtmlAttr($mode) ?>" data-cols="<?= $escaper->escapeHtmlAttr($columnsCount) ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
     <li class="item">
         <div class="parent-category-wrapper">
             <?php if ($block->getParentCategoryPosition() === 'over') : ?>
                 <div class="category-name parent-category parent-category-over">
-                    <h2 class="name"><?= $block->escapeHtml($_category->getName()) ?></h2>
+                    <h2 class="name"><?= $escaper->escapeHtml($_category->getName()) ?></h2>
                     <div class="category-link">
-                        <a class="action primary" href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
-                            <span><?= __('Shop Now') ?></span>
+                        <a class="action primary" href="<?= $escaper->escapeUrl($block->getCategoryUrl($_category)) ?>" title="<?= $escaper->escapeHtmlAttr($_category->getName()) ?>">
+                            <span><?= $escaper->escapeHtml(__('Shop Now')) ?></span>
                         </a>
                     </div>
                 </div>
             <?php elseif ($block->getParentCategoryPosition() === 'top'): ?>
                 <div class="category-name parent-category parent-category-top">
-                    <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
-                        <?= $block->escapeHtml($_category->getName()) ?>
+                    <a href="<?= $escaper->escapeUrl($block->getCategoryUrl($_category)) ?>" title="<?= $escaper->escapeHtmlAttr($_category->getName()) ?>">
+                        <?= $escaper->escapeHtml($_category->getName()) ?>
                     </a>
                 </div>
             <?php endif ?>
@@ -46,25 +48,25 @@
                     }
                     list($srcset, $sizes) = $block->getResponsiveAttributes($_category, $width, $height);
                 ?>
-                <a href="<?= $block->getCategoryUrl($_category) ?>"
+                <a href="<?= $escaper->escapeUrl($block->getCategoryUrl($_category)) ?>"
                     <?= $isParentNameVisible ? 'tabindex="-1"' : '' ?>
-                    title="<?= $block->escapeHtml($_category->getName()) ?>"
+                    title="<?= $escaper->escapeHtmlAttr($_category->getName()) ?>"
                     class="image"
-                ><img alt="<?= $block->escapeHtml($_category->getName()) ?>"
-                    src="<?= $block->getImageSrc($_category, $width, $height) ?>"
-                    <?= $srcset ? 'srcset="' . $srcset . '"' : '' ?>
-                    <?= $sizes  ? 'sizes="' . $sizes . '"' : '' ?>
-                    <?= $width  ? 'width="' . $width . '"' : '' ?>
-                    <?= $height ? 'height="' . $height . '"' : '' ?>
-                    <?= $style  ? 'style="' . $style . '"' : '' ?>
+                ><img alt="<?= $escaper->escapeHtmlAttr($_category->getName()) ?>"
+                    src="<?= $escaper->escapeHtmlAttr($block->getImageSrc($_category, $width, $height)) ?>"
+                    <?= $srcset ? 'srcset="' . $escaper->escapeHtmlAttr($srcset) . '"' : '' ?>
+                    <?= $sizes  ? 'sizes="' . $escaper->escapeHtmlAttr($sizes) . '"' : '' ?>
+                    <?= $width  ? 'width="' . $escaper->escapeHtmlAttr($width) . '"' : '' ?>
+                    <?= $height ? 'height="' . $escaper->escapeHtmlAttr($height) . '"' : '' ?>
+                    <?= $style  ? 'style="' . $escaper->escapeHtmlAttr($style) . '"' : '' ?>
                     <?= $i > $block->getImageLazyloadOffset() ? 'loading="lazy"' : '' ?>
                 /></a>
             <?php endif; ?>
 
             <?php if ($block->getParentCategoryPosition() === 'bottom') : ?>
                 <div class="category-name parent-category parent-category-bottom">
-                    <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>">
-                        <?= $block->escapeHtml($_category->getName()) ?>
+                    <a href="<?= $escaper->escapeUrl($block->getCategoryUrl($_category)) ?>" title="<?= $escaper->escapeHtmlAttr($_category->getName()) ?>">
+                        <?= $escaper->escapeHtml($_category->getName()) ?>
                     </a>
                 </div>
             <?php endif ?>
@@ -82,17 +84,17 @@
                 <?php foreach ($_subcategories as $_subcategory) :
                     if ($_displayMoreLink && ($j > $maxSubcategoryCount - 1)): ?>
                         <li>
-                            <a href="<?= $block->getCategoryUrl($_category) ?>" title="<?= $block->escapeHtml($_category->getName()) ?>" class="link-more">
-                                <?= __('More in %1...', $block->escapeHtml($_category->getName())); ?>
+                            <a href="<?= $escaper->escapeUrl($block->getCategoryUrl($_category)) ?>" title="<?= $escaper->escapeHtmlAttr($_category->getName()) ?>" class="link-more">
+                                <?= __('More in %1...', $escaper->escapeHtml($_category->getName())); ?>
                             </a>
                         </li>
                         <?php break;
                     endif; ?>
                     <li>
-                        <a href="<?= $block->getCategoryUrl($_subcategory) ?>"
-                            title="<?= $block->escapeHtml($_subcategory->getName())?>"
+                        <a href="<?= $escaper->escapeUrl($block->getCategoryUrl($_subcategory)) ?>"
+                            title="<?= $escaper->escapeHtmlAttr($_subcategory->getName())?>"
                             class="category-name child-category">
-                            <?= $block->escapeHtml($_subcategory->getName());?>
+                            <?= $escaper->escapeHtml($_subcategory->getName());?>
                         </a>
                     </li>
                     <?php $j++; ?>
