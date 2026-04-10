@@ -15,7 +15,10 @@
     $mode = $block->getMode();
     $isParentNameVisible = in_array($block->getParentCategoryPosition(), ['over', 'top', 'bottom']);
 ?>
-<div class="easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
+<div class="<?= $this->getBlockCustomCss() ?: '' ?> easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
+<?php if ($block->getBlockTitleHtml()) : ?>
+    <div class="block-title"><?= __($block->getBlockTitleHtml()) ?></div>
+<?php endif; ?>
 <ul class="unstyled <?= $escaper->escapeHtmlAttr($block->getCssClassName()) ?>" data-mode="<?= $escaper->escapeHtmlAttr($mode) ?>" data-cols="<?= $escaper->escapeHtmlAttr($columnsCount) ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
