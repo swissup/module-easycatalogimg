@@ -15,7 +15,7 @@
     $mode = $block->getMode();
     $isParentNameVisible = in_array($block->getParentCategoryPosition(), ['over', 'top', 'bottom']);
 ?>
-<div class="<?= $this->getBlockCustomCss() ?: '' ?> easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
+<div class="<?= $escaper->escapeHtmlAttr($this->getBlockCustomCss() ?: '') ?> easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
 <?php if ($block->getBlockTitleHtml()) : ?>
     <div class="block-title"><?= __($block->getBlockTitleHtml()) ?></div>
 <?php endif; ?>
