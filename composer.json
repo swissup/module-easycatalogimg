@@ -7,10 +7,10 @@
         "subcategory listing"
     ],
     "type": "magento2-module",
-    "version": "1.5.13",
+    "version": "1.5.14",
     "license": "OSL-3.0",
     "require": {
-        "swissup/module-core": "^1.12.24"
+        "swissup/module-core": "^1.12.26"
     },
     "autoload": {
         "files": [ "registration.php" ],
