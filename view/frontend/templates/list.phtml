@@ -13,12 +13,19 @@
     $maxSubcategoryCount = $block->getSubcategoryCount();
     $i = 0;
     $mode = $block->getMode();
+    $useBlockWrapper = $block->getUseBlockWrapper();
     $isParentNameVisible = in_array($block->getParentCategoryPosition(), ['over', 'top', 'bottom']);
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($this->getBlockCustomCss() ?: '') ?> easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
-<?php if ($block->getBlockTitleHtml()) : ?>
-    <div class="block-title"><?= /* @noEscape */ __($block->getBlockTitleHtml()) ?></div>
-<?php endif; ?>
+
+<?php if ($useBlockWrapper) : ?>
+    <div class="block <?= $escaper->escapeHtmlAttr($this->getBlockWrapperCss() ?: '') ?>">
+    <?php if ($block->getBlockTitleHtml()) : ?>
+        <div class="block-title"><?= /* @noEscape */ __($block->getBlockTitleHtml()) ?></div>
+    <?php endif; ?>
+    <div class="block-content">
+<?php endif ?>
+
+<div class="easycatalogimg <?= $this->getHideWhenFilterIsUsed() ? 'hide-when-filter' : '' ?>" data-content-type="easycatalogimg">
 <ul class="unstyled <?= $escaper->escapeHtmlAttr($block->getCssClassName()) ?>" data-mode="<?= $escaper->escapeHtmlAttr($mode) ?>" data-cols="<?= $escaper->escapeHtmlAttr($columnsCount) ?>">
 <?php foreach ($_categories as $_category) : ?>
     <?php if ($i++ >= $maxCategoryCount): break; endif; ?>
@@ -111,3 +118,8 @@
 <?php endforeach; ?>
 </ul>
 </div>
+
+<?php if ($useBlockWrapper) : ?>
+    </div>
+</div>
+<?php endif ?>
