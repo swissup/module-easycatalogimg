@@ -55,7 +55,7 @@ class DataProvider
     ) {
         $category = $subject->getCurrentCategory();
         if ($category) {
-            $id = $category->getId();
+            $id = (int) $category->getId();
 
             // unset image data if there are no name and url (if an error accures during category save)
             foreach (['thumbnail', 'image'] as $attr) {
